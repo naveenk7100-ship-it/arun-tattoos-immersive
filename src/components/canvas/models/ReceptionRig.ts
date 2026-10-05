@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import type { StudioMaterialSet } from '../studioMaterials';
+import { assetUrl } from '../../../utils/assetUrl';
 
 /**
  * Architectural 3D model for Zone 02: Reception & Concierge
@@ -71,7 +72,7 @@ export function createReceptionRig(materials: StudioMaterialSet): THREE.Group {
   logoMedallionMesh.position.set(0, 0.58, 0.505);
   group.add(logoMedallionMesh);
 
-  new THREE.TextureLoader().load('/images/branding/arun-tattoos-logo.jpg', (logoTex) => {
+  new THREE.TextureLoader().load(assetUrl('/images/branding/arun-tattoos-logo.jpg'), (logoTex) => {
     logoTex.colorSpace = THREE.SRGBColorSpace;
     logoMedallionMat.map = logoTex;
     logoMedallionMat.needsUpdate = true;

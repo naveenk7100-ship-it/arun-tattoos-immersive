@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import type { StudioMaterialSet } from '../studioMaterials';
+import { assetUrl } from '../../../utils/assetUrl';
 
 /**
  * Procedural high-resolution canvas texture generators for Arun Tattoos Art Gallery
@@ -285,10 +286,10 @@ export function createGalleryWallRig(materials: StudioMaterialSet): THREE.Group 
   const mandalaTex = createMandalaArtTexture();
 
   const artworks = [
-    { z: -2.4, title: 'Lord Shiva Mahakal Trishul', width: 1.25, height: 1.7, texture: shivaTex, imgUrl: '/images/gallery/shiva-mahakal-trishul.png' },
-    { z: -0.2, title: 'Hyper-Realism Portrait Tribute', width: 1.15, height: 1.55, texture: portraitTex, imgUrl: '/images/gallery/realism-portrait-tribute.png' },
-    { z: 2.0, title: 'Compass & Geometric Band', width: 0.95, height: 1.35, texture: botanicalTex, imgUrl: '/images/gallery/compass-geometric-band.png' },
-    { z: 4.2, title: 'Goddess Kali Sacred Backpiece', width: 1.2, height: 1.6, texture: mandalaTex, imgUrl: '/images/gallery/kali-goddess-backpiece.jpg' },
+    { z: -2.4, title: 'Lord Shiva Mahakal Trishul', width: 1.25, height: 1.7, texture: shivaTex, imgUrl: assetUrl('/images/gallery/shiva-mahakal-trishul.png') },
+    { z: -0.2, title: 'Hyper-Realism Portrait Tribute', width: 1.15, height: 1.55, texture: portraitTex, imgUrl: assetUrl('/images/gallery/realism-portrait-tribute.png') },
+    { z: 2.0, title: 'Compass & Geometric Band', width: 0.95, height: 1.35, texture: botanicalTex, imgUrl: assetUrl('/images/gallery/compass-geometric-band.png') },
+    { z: 4.2, title: 'Goddess Kali Sacred Backpiece', width: 1.2, height: 1.6, texture: mandalaTex, imgUrl: assetUrl('/images/gallery/kali-goddess-backpiece.jpg') },
   ];
 
   const EYE_LEVEL_Y = 1.65; // Standard international museum hanging centerline
