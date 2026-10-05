@@ -27,11 +27,12 @@ dist-ssr
 .env
 .env*.local
 
-# SQLite Database & Uploads
-*.sqlite
-*.sqlite3
-*.db
+# SQLite Database & Runtime Data
+*.sqlite*
+*.db*
 server/database.sqlite*
+server/data/*
+!server/data/.gitkeep
 server/uploads/*
 !server/uploads/.gitkeep
 uploads/*
