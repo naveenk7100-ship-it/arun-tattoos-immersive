@@ -285,10 +285,10 @@ export function createGalleryWallRig(materials: StudioMaterialSet): THREE.Group 
   const mandalaTex = createMandalaArtTexture();
 
   const artworks = [
-    { z: -2.4, title: 'Sacred Divine — Lord Shiva', width: 1.25, height: 1.7, texture: shivaTex },
-    { z: -0.2, title: 'Realism Portraiture — The Monk', width: 1.15, height: 1.55, texture: portraitTex },
-    { z: 2.0, title: 'Micro-Realism Botanical', width: 0.95, height: 1.35, texture: botanicalTex },
-    { z: 4.2, title: 'Sacred Mandala Sleeve', width: 1.2, height: 1.6, texture: mandalaTex },
+    { z: -2.4, title: 'Lord Shiva Mahakal Trishul', width: 1.25, height: 1.7, texture: shivaTex, imgUrl: '/images/gallery/shiva-mahakal-trishul.png' },
+    { z: -0.2, title: 'Hyper-Realism Portrait Tribute', width: 1.15, height: 1.55, texture: portraitTex, imgUrl: '/images/gallery/realism-portrait-tribute.png' },
+    { z: 2.0, title: 'Compass & Geometric Band', width: 0.95, height: 1.35, texture: botanicalTex, imgUrl: '/images/gallery/compass-geometric-band.png' },
+    { z: 4.2, title: 'Goddess Kali Sacred Backpiece', width: 1.2, height: 1.6, texture: mandalaTex, imgUrl: '/images/gallery/kali-goddess-backpiece.jpg' },
   ];
 
   const EYE_LEVEL_Y = 1.65; // Standard international museum hanging centerline
@@ -320,6 +320,15 @@ export function createGalleryWallRig(materials: StudioMaterialSet): THREE.Group 
       emissive: 0x111115,
       emissiveIntensity: 0.2,
     });
+
+    if (art.imgUrl) {
+      new THREE.TextureLoader().load(art.imgUrl, (realTex) => {
+        realTex.colorSpace = THREE.SRGBColorSpace;
+        canvasMat.map = realTex;
+        canvasMat.needsUpdate = true;
+      });
+    }
+
     const canvasPlane = new THREE.Mesh(
       new THREE.BoxGeometry(0.06, art.height - 0.02, art.width - 0.02),
       canvasMat

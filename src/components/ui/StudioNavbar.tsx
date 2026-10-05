@@ -58,8 +58,19 @@ export const StudioNavbar: React.FC<StudioNavbarProps> = ({
           onClick={() => handleZoneClick('entrance')}
           className="cursor-pointer group flex items-center gap-3.5 select-none"
         >
-          <div className="w-10 h-10 rounded-full border border-[#d4af37]/40 bg-[#121217]/90 flex items-center justify-center transition-transform duration-500 group-hover:scale-105 group-hover:border-[#d4af37] shadow-lg shadow-black/60">
-            <span className="font-cinzel text-[#d4af37] text-sm font-bold tracking-wider">AT</span>
+          <div className="w-10 h-10 rounded-full border border-[#d4af37]/60 bg-[#121217] flex items-center justify-center transition-transform duration-500 group-hover:scale-105 group-hover:border-[#d4af37] shadow-lg shadow-black/80 overflow-hidden">
+            {STUDIO_CONTACT.logoUrl ? (
+              <img
+                src={STUDIO_CONTACT.logoUrl}
+                alt="Arun Tattoos Official Crest"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  (e.currentTarget as HTMLElement).style.display = 'none';
+                }}
+              />
+            ) : (
+              <span className="font-cinzel text-[#d4af37] text-sm font-bold tracking-wider">AT</span>
+            )}
           </div>
           <div className="flex flex-col">
             <span className="font-cinzel tracking-[0.22em] text-sm md:text-base font-bold text-white group-hover:text-[#ffd67a] transition-colors">

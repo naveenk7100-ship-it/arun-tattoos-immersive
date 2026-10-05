@@ -3,6 +3,8 @@ import type { TranslationSchema } from './types';
 export const en: TranslationSchema = {
   nav: {
     brandSubtitle: 'VIJAYAWADA • EST. 2017',
+    tagline: 'INK YOUR STORY.',
+    subheadline: 'PRECISION. ARTISTRY. IDENTITY.',
     floorPlan: 'Floor Plan',
     bookSession: 'Book Session',
     callNow: 'Call Studio',
@@ -17,7 +19,7 @@ export const en: TranslationSchema = {
       name: 'Studio Threshold',
       code: 'ZONE 01',
       subhead: 'The Portal to Expression',
-      desc: 'Step into Vijayawada’s premier sanctuary of permanent fine art. Helmed by master artist Nani Kumar (8+ years experience, TTC certified) and Yeswanth. Experience custom portrait realism, delicate micro-lines, and hospital-grade sterile artistry.',
+      desc: 'Step into Vijayawada’s premier sanctuary of permanent fine art. Helmed by master artist Arun (Nani Kumar, 8+ years experience, TTC certified) and Yeswanth. Experience custom portrait realism, delicate micro-lines, and hospital-grade sterile artistry.',
       badge: 'BANDAR ROAD, VIJAYAWADA',
       enterBtn: 'Enter Studio Experience',
       consultBtn: 'Direct Consultation',

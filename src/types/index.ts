@@ -205,7 +205,10 @@ export interface AdminOverviewMetrics {
 
 export interface StudioContact {
   studioName: string;
+  ownerName?: string;
+  logoUrl?: string;
   tagline: string;
+  subheadline?: string;
   address: {
     doorNo: string;
     colony: string;
@@ -220,6 +223,8 @@ export interface StudioContact {
   };
   phone: string;
   formattedPhone: string;
+  secondaryPhone?: string;
+  formattedSecondaryPhone?: string;
   email: string;
   workingHours: string;
   socials: {

@@ -59,6 +59,24 @@ export function createReceptionRig(materials: StudioMaterialSet): THREE.Group {
   plaqueBronze.position.set(0, 0.58, 0.49);
   group.add(plaqueBronze);
 
+  // Official Arun Tattoos Logo Medallion on Reception Desk
+  const logoMedallionGeo = new THREE.CylinderGeometry(0.13, 0.13, 0.015, 32);
+  logoMedallionGeo.rotateX(Math.PI / 2);
+  const logoMedallionMat = new THREE.MeshStandardMaterial({
+    color: 0xffffff,
+    metalness: 0.15,
+    roughness: 0.35,
+  });
+  const logoMedallionMesh = new THREE.Mesh(logoMedallionGeo, logoMedallionMat);
+  logoMedallionMesh.position.set(0, 0.58, 0.505);
+  group.add(logoMedallionMesh);
+
+  new THREE.TextureLoader().load('/images/branding/arun-tattoos-logo.jpg', (logoTex) => {
+    logoTex.colorSpace = THREE.SRGBColorSpace;
+    logoMedallionMat.map = logoTex;
+    logoMedallionMat.needsUpdate = true;
+  });
+
   // 5. Desktop Accessories:
   // Minimalist Client iMac / Consultation terminal on brushed aluminum swivel stand
   const imacGroup = new THREE.Group();

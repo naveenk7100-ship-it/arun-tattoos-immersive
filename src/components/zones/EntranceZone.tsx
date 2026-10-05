@@ -55,8 +55,12 @@ export const EntranceZone: React.FC<EntranceZoneProps> = ({ onEnter, onOpenBooki
         ARUN <span className="gold-gradient-text">TATTOOS</span>
       </h1>
 
-      <p className="font-cinzel text-lg sm:text-2xl md:text-3xl tracking-[0.24em] md:tracking-[0.32em] text-[#d4af37] font-semibold mb-6 uppercase">
+      <p className="font-cinzel text-lg sm:text-2xl md:text-3xl tracking-[0.24em] md:tracking-[0.32em] text-[#d4af37] font-semibold mb-1 uppercase">
         INK YOUR STORY.
+      </p>
+
+      <p className="text-xs sm:text-sm tracking-[0.28em] md:tracking-[0.34em] text-zinc-400 font-mono uppercase mb-6">
+        PRECISION. ARTISTRY. IDENTITY.
       </p>
 
       <p className="max-w-xl text-xs sm:text-sm md:text-base text-zinc-300 font-sans leading-relaxed mb-8 font-normal">

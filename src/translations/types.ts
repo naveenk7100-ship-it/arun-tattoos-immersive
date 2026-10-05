@@ -3,6 +3,8 @@ export type SupportedLanguage = 'en' | 'te';
 export interface TranslationSchema {
   nav: {
     brandSubtitle: string;
+    tagline: string;
+    subheadline: string;
     floorPlan: string;
     bookSession: string;
     callNow: string;

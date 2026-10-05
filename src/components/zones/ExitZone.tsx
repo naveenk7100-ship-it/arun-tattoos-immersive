@@ -33,8 +33,11 @@ export const ExitZone: React.FC<ExitZoneProps> = ({ onReturnToStart, onOpenBooki
         <h2 className="text-4xl md:text-6xl font-cinzel font-black text-white mt-2 mb-3">
           {ez.name}
         </h2>
-        <p className="font-cinzel text-lg md:text-xl text-[#d4af37] font-semibold mb-4">
+        <p className="font-cinzel text-lg md:text-xl text-[#d4af37] font-semibold mb-1">
           "INK YOUR STORY."
+        </p>
+        <p className="text-xs font-mono tracking-[0.25em] text-zinc-400 uppercase mb-4">
+          PRECISION. ARTISTRY. IDENTITY.
         </p>
         <p className="text-xs md:text-sm text-zinc-300 font-sans">
           {ez.desc}
@@ -72,13 +75,23 @@ export const ExitZone: React.FC<ExitZoneProps> = ({ onReturnToStart, onOpenBooki
                 <h4 className="text-sm font-cinzel font-bold text-white uppercase tracking-wider">
                   {ez.directLine}
                 </h4>
-                <a
-                  href={`tel:${STUDIO_CONTACT.phone}`}
-                  className="text-xs font-mono text-[#ffd885] hover:underline mt-1 block"
-                >
-                  {STUDIO_CONTACT.formattedPhone}
-                </a>
-                <span className="text-[10px] font-mono text-zinc-500">Available 10:30 AM – 9:30 PM IST</span>
+                <div className="flex flex-col gap-1 mt-1">
+                  <a
+                    href={`tel:${STUDIO_CONTACT.phone}`}
+                    className="text-xs font-mono text-[#ffd885] hover:underline block"
+                  >
+                    {STUDIO_CONTACT.formattedPhone}
+                  </a>
+                  {STUDIO_CONTACT.formattedSecondaryPhone && (
+                    <a
+                      href={`tel:${STUDIO_CONTACT.secondaryPhone}`}
+                      className="text-xs font-mono text-zinc-300 hover:text-white hover:underline block"
+                    >
+                      {STUDIO_CONTACT.formattedSecondaryPhone} <span className="text-[10px] text-zinc-500">(Direct Studio Line)</span>
+                    </a>
+                  )}
+                </div>
+                <span className="text-[10px] font-mono text-zinc-500 block mt-1">Available 10:30 AM – 9:30 PM IST</span>
               </div>
             </div>
 
