@@ -10,7 +10,7 @@ export const AdminTestimonialsView: React.FC = () => {
   // Form State
   const [clientName, setClientName] = useState('');
   const [review, setReview] = useState('');
-  const [artist, setArtist] = useState('Nani Kumar');
+  const [artist, setArtist] = useState('Arun');
   const [tattooDone, setTattooDone] = useState('');
   const [location, setLocation] = useState('Vijayawada, AP');
   const [rating, setRating] = useState(5);
@@ -215,9 +215,7 @@ export const AdminTestimonialsView: React.FC = () => {
                     onChange={(e) => setArtist(e.target.value)}
                     className="w-full px-3 py-2 rounded-xl bg-black border border-white/15 text-white focus:border-[#d4af37] focus:outline-none"
                   >
-                    <option value="Nani Kumar">Nani Kumar</option>
-                    <option value="Yeswanth">Yeswanth</option>
-                    <option value="Yeswanth & Nani Kumar">Yeswanth & Nani Kumar</option>
+                    <option value="Arun">Arun</option>
                   </select>
                 </div>
 

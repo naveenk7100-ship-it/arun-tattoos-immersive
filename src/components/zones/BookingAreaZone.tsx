@@ -15,7 +15,7 @@ import {
   Lock,
   ArrowRight
 } from 'lucide-react';
-import { STUDIO_CONTACT, TESTIMONIALS } from '../../data/studioData';
+import { STUDIO_CONTACT, STUDIO_PILLARS } from '../../data/studioData';
 import type { BookingSubmission } from '../../types';
 import { useLanguage } from '../../translations/LanguageContext';
 import { api, type BookingResponse } from '../../services/api';
@@ -39,7 +39,7 @@ export const BookingAreaZone: React.FC<BookingAreaZoneProps> = ({
     fullName: '',
     phone: '',
     email: '',
-    preferredArtist: initialArtist || 'Nani Kumar',
+    preferredArtist: initialArtist || 'Arun',
     style: initialStyle || 'Custom Portrait Art',
     placement: 'Forearm / Inner Arm',
     size: 'Medium (4–6 inches)',
@@ -405,9 +405,7 @@ export const BookingAreaZone: React.FC<BookingAreaZoneProps> = ({
                     onChange={(e) => setFormData({ ...formData, preferredArtist: e.target.value })}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-black/40 border border-white/10 text-xs text-white focus:border-[#d4af37] focus:outline-none"
                   >
-                    <option value="Nani Kumar">Nani Kumar (Founder • Portrait & Fine Line)</option>
-                    <option value="Yeswanth">Yeswanth (Resident • Realism & Cover-ups)</option>
-                    <option value="First Available Artist">First Available Artist</option>
+                    <option value="Arun">Arun (Owner & Master Artist)</option>
                   </select>
                 </div>
 
@@ -727,7 +725,7 @@ export const BookingAreaZone: React.FC<BookingAreaZoneProps> = ({
               {t.zones.bookingArea.directDeskHotline}
             </h4>
             <p className="text-xs text-zinc-300 mb-4 leading-relaxed">
-              Prefer speaking with artist Nani Kumar or Yeswanth directly? Reach our studio desk during daily hours (10:30 AM – 9:30 PM).
+              Prefer speaking with master artist Arun directly? Call or WhatsApp our studio desk.
             </p>
 
             <a
@@ -739,47 +737,43 @@ export const BookingAreaZone: React.FC<BookingAreaZoneProps> = ({
             </a>
           </div>
 
-          {/* Real Verified Client Reviews Carousel */}
+          {/* Authentic Studio Standards & Philosophy */}
           <div className="subtle-glass p-6 rounded-3xl border border-white/10 shadow-xl">
             <div className="flex items-center justify-between mb-4">
-              <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">
-                VERIFIED COLLECTOR REVIEWS
+              <span className="text-[10px] font-mono text-[#d4af37] uppercase tracking-wider">
+                STUDIO PILLARS & STANDARDS
               </span>
               <div className="flex items-center gap-1">
-                {[0, 1, 2].map((idx) => (
+                {STUDIO_PILLARS.map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => setActiveReviewIdx(idx)}
                     className={`w-2 h-2 rounded-full transition-all ${
                       idx === activeReviewIdx ? 'w-5 bg-[#d4af37]' : 'bg-white/20'
                     }`}
-                    aria-label={`View review ${idx + 1}`}
+                    aria-label={`View pillar ${idx + 1}`}
                   />
                 ))}
               </div>
             </div>
 
-            {TESTIMONIALS[activeReviewIdx] && (
-              <div className="space-y-3 animate-in fade-in duration-300">
-                <div className="flex items-center gap-1 text-[#ffd885]">
-                  {[...Array(TESTIMONIALS[activeReviewIdx].rating)].map((_, i) => (
-                    <span key={i} className="text-xs">★</span>
-                  ))}
-                  <span className="text-[11px] font-mono text-zinc-400 ml-2">5.0 Star Experience</span>
-                </div>
+            {STUDIO_PILLARS[activeReviewIdx] && (
+              <div className="space-y-2.5 animate-in fade-in duration-300">
+                <span className="text-[10px] font-mono uppercase text-[#d4af37] tracking-wider block">
+                  {STUDIO_PILLARS[activeReviewIdx].subtitle}
+                </span>
 
-                <p className="text-xs text-zinc-200 italic leading-relaxed">
-                  "{TESTIMONIALS[activeReviewIdx].review}"
+                <h4 className="text-sm font-bold text-white font-cinzel">
+                  {STUDIO_PILLARS[activeReviewIdx].title}
+                </h4>
+
+                <p className="text-xs text-zinc-300 leading-relaxed font-sans">
+                  {STUDIO_PILLARS[activeReviewIdx].description}
                 </p>
 
-                <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[11px]">
-                  <div>
-                    <span className="text-white font-medium block">{TESTIMONIALS[activeReviewIdx].author}</span>
-                    <span className="text-zinc-500 font-mono text-[10px]">{TESTIMONIALS[activeReviewIdx].tattooDone}</span>
-                  </div>
-                  <span className="text-[#d4af37] font-mono text-[10px]">
-                    By {TESTIMONIALS[activeReviewIdx].artist}
-                  </span>
+                <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[10px] text-zinc-400 font-mono">
+                  <span>ARUN TATTOOS</span>
+                  <span className="text-[#ffd885]">MASTER ARTISTRY</span>
                 </div>
               </div>
             )}

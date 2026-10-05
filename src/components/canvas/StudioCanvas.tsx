@@ -302,7 +302,7 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
     const galleryRig = createGalleryWallRig(materials);
     scene.add(galleryRig);
 
-    // Zone 04: Nani Kumar's Atelier Drafting Desk
+    // Zone 04: Arun's Atelier Drafting Desk
     const artistDeskRig = createArtistDeskRig(materials);
     scene.add(artistDeskRig);
 

@@ -65,7 +65,7 @@ export const ReceptionZone: React.FC<ReceptionZoneProps> = ({ onNavigateZone, on
             Artist Desks
           </h3>
           <p className="text-xs text-zinc-300 mb-4 leading-relaxed">
-            Meet founder Nani Kumar (8+ yrs experience, TTC certified, Graphic Designer) and co-artist Yeswanth at their drafting stations.
+            Consult with master artist Arun (8+ yrs experience, fine art drafting & sterile standards) at the drafting atelier.
           </p>
           <div className="flex items-center gap-1.5 text-xs font-semibold text-[#ffd885] group-hover:translate-x-1 transition-transform">
             <span>{rz.meetArtists}</span>
@@ -107,7 +107,7 @@ export const ReceptionZone: React.FC<ReceptionZoneProps> = ({ onNavigateZone, on
               Complimentary Concept Consultation
             </h4>
             <p className="text-xs md:text-sm text-zinc-300 mt-1 max-w-xl">
-              Unsure which style suits your anatomy? Sit with Nani Kumar or Yeswanth to calibrate sizing, design flow, and longevity before committing to ink.
+              Unsure which style suits your anatomy? Sit with Arun to calibrate sizing, design flow, and longevity before committing to ink.
             </p>
           </div>
         </div>

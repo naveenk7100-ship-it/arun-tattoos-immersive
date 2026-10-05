@@ -102,7 +102,7 @@ export const AftercareZone: React.FC = () => {
             </li>
             <li className="flex items-start gap-2">
               <span className="text-emerald-400">•</span>
-              <span>Contact Nani Kumar immediately if you notice unusual redness or heat.</span>
+              <span>Contact Arun immediately if you notice unusual redness or heat.</span>
             </li>
           </ul>
         </div>

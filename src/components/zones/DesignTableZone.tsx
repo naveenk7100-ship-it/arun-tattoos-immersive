@@ -190,7 +190,7 @@ export const DesignTableZone: React.FC<DesignTableZoneProps> = ({ onOpenBooking 
             <span className="text-[10px] font-mono text-[#d4af37] block mb-1">STEP 02</span>
             <h5 className="text-xs font-bold text-white mb-1.5 font-cinzel">Digital Concept Draft</h5>
             <p className="text-[11px] text-zinc-400 leading-relaxed">
-              Nani Kumar applies graphic design tonal rendering to tailor shadows for maximum long-term clarity.
+              Arun applies master tonal rendering to tailor shadows for maximum long-term clarity.
             </p>
           </div>
 

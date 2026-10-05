@@ -32,13 +32,13 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onLoginSuccess, onBackTo
   };
 
   const handleFillDemoAdmin = () => {
-    setEmail('admin@aruntattoostudio.com');
-    setPassword('ArunTattoos@Vijayawada2025');
+    setEmail('admin@aruntattoos.com');
+    setPassword('ArunTattoos@2025');
   };
 
   const handleFillDemoArtist = () => {
-    setEmail('nani@aruntattoostudio.com');
-    setPassword('NaniKumar@2025');
+    setEmail('arun@aruntattoos.com');
+    setPassword('ArunTattoos@2025');
   };
 
   return (

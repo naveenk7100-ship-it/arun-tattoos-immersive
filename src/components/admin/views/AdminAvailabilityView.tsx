@@ -7,7 +7,7 @@ export const AdminAvailabilityView: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   // Form State
-  const [artistId, setArtistId] = useState('nani-kumar');
+  const [artistId, setArtistId] = useState('arun');
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
   const [startTime, setStartTime] = useState('10:30 AM');
   const [endTime, setEndTime] = useState('02:00 PM');
@@ -82,20 +82,16 @@ export const AdminAvailabilityView: React.FC = () => {
           {/* Base Operating Hours */}
           <div className="p-6 rounded-3xl subtle-glass border border-white/10 space-y-4">
             <span className="text-[10px] font-mono text-[#d4af37] uppercase tracking-wider block">
-              STANDARD STUDIO HOURS (VIJAYAWADA)
+              STANDARD STUDIO HOURS
             </span>
             <div className="space-y-3 text-xs font-mono">
               <div className="flex justify-between items-center pb-2 border-b border-white/5">
                 <span className="text-white font-medium">Monday – Sunday:</span>
                 <span className="text-[#ffd885] font-bold">10:30 AM – 9:30 PM IST</span>
               </div>
-              <div className="flex justify-between items-center pb-2 border-b border-white/5">
-                <span className="text-white font-medium">Nani Kumar (Founder):</span>
-                <span className="text-zinc-300">Custom Portrait Sessions (Priority Slotting)</span>
-              </div>
               <div className="flex justify-between items-center">
-                <span className="text-white font-medium">Yeswanth (Resident):</span>
-                <span className="text-zinc-300">Realism & Cover-Up Hours (Open Daily)</span>
+                <span className="text-white font-medium">Arun (Owner & Master Artist):</span>
+                <span className="text-zinc-300">By Appointment & Consultation</span>
               </div>
             </div>
           </div>
@@ -121,8 +117,7 @@ export const AdminAvailabilityView: React.FC = () => {
                   onChange={(e) => setArtistId(e.target.value)}
                   className="w-full px-3 py-2 rounded-xl bg-black/50 border border-white/10 text-white focus:border-[#d4af37] focus:outline-none"
                 >
-                  <option value="nani-kumar">Nani Kumar</option>
-                  <option value="yeswanth">Yeswanth</option>
+                  <option value="arun">Arun</option>
                   <option value="all-studio">Entire Studio (Holiday / Maintenance)</option>
                 </select>
               </div>
@@ -218,7 +213,7 @@ export const AdminAvailabilityView: React.FC = () => {
                 >
                   <div>
                     <span className="text-white font-medium block">
-                      {rule.artist_id === 'nani-kumar' ? 'Nani Kumar' : rule.artist_id === 'yeswanth' ? 'Yeswanth' : 'Entire Studio'}
+                      {rule.artist_id === 'arun' ? 'Arun' : 'Entire Studio'}
                     </span>
                     <span className="text-[11px] text-zinc-400">
                       {rule.date} • {rule.start_time} to {rule.end_time}

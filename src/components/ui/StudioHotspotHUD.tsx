@@ -35,8 +35,8 @@ const HOTSPOTS: Record<StudioZoneId, HotspotDefinition> = {
   },
   'artist-desk': {
     zoneId: 'artist-desk',
-    label: 'MEET NANI KUMAR & YESWANTH',
-    sublabel: 'Review 8+ yrs TTC credentials',
+    label: 'MEET MASTER ARTIST ARUN',
+    sublabel: 'Review 8+ yrs fine art credentials',
     icon: <User className="w-3.5 h-3.5 text-[#d4af37]" />,
   },
   'tattoo-station': {

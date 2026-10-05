@@ -33,7 +33,7 @@ export const EntranceZone: React.FC<EntranceZoneProps> = ({ onEnter, onOpenBooki
 
   const journeySteps = [
     { step: '01', title: 'IDEA', desc: 'Bring your personal story, memories, or visual concept.' },
-    { step: '02', title: 'DESIGN', desc: 'Nani Kumar drafts custom digital sketches on Wacom Cintiq.' },
+    { step: '02', title: 'DESIGN', desc: 'Arun drafts custom digital sketches on Wacom displays.' },
     { step: '03', title: 'CONSULTATION', desc: 'Calibrate size, anatomical flow, and stencil placement.' },
     { step: '04', title: 'TATTOO', desc: 'Relax in our sterile bay with Bishop rotary precision.' },
     { step: '05', title: 'AFTERCARE', desc: 'Medical-grade SecondSkin barrier and natural healing balms.' },
@@ -45,7 +45,7 @@ export const EntranceZone: React.FC<EntranceZoneProps> = ({ onEnter, onOpenBooki
       {/* 1. Atelier Location & Status Pill */}
       <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full subtle-glass border border-[#d4af37]/35 text-xs font-mono text-[#d4af37] mb-6 shadow-lg shadow-black/40">
         <MapPin className="w-3.5 h-3.5 text-[#d4af37]" />
-        <span className="tracking-wider">BANDAR ROAD, VIJAYAWADA</span>
+        <span className="tracking-wider">OPPOSITE TO GRAVITY GYM, FIRST FLOOR</span>
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
         <span className="text-zinc-300 font-sans text-[11px]">STUDIO OPEN TODAY</span>
       </div>
@@ -56,7 +56,7 @@ export const EntranceZone: React.FC<EntranceZoneProps> = ({ onEnter, onOpenBooki
       </h1>
 
       <p className="font-cinzel text-lg sm:text-2xl md:text-3xl tracking-[0.24em] md:tracking-[0.32em] text-[#d4af37] font-semibold mb-1 uppercase">
-        INK YOUR STORY.
+        CRAFTED IN INK. DEFINED BY YOU.
       </p>
 
       <p className="text-xs sm:text-sm tracking-[0.28em] md:tracking-[0.34em] text-zinc-400 font-mono uppercase mb-6">
@@ -65,8 +65,8 @@ export const EntranceZone: React.FC<EntranceZoneProps> = ({ onEnter, onOpenBooki
 
       <p className="max-w-xl text-xs sm:text-sm md:text-base text-zinc-300 font-sans leading-relaxed mb-8 font-normal">
         {language === 'te'
-          ? 'విజయవాడ యొక్క ప్రీమియర్ కస్టమ్ టాటూ స్టూడియో. 8+ సంవత్సరాల కళా నైపుణ్యం, TTC సర్టిఫికేషన్ మరియు 100% స్టెరైల్ ప్రొఫెషనల్ కేర్.'
-          : "Vijayawada's premier bespoke tattoo atelier led by Nani Kumar. Master portraiture, sacred realism, and clinical hygiene on Bandar Road."}
+          ? 'అరుణ్ టాటూస్ ప్రీమియం శాశ్వత చిత్రకళా కేంద్రం. 8+ సంవత్సరాల కళా నైపుణ్యం మరియు 100% పరిశుభ్రమైన ప్రొఫెషనల్ కేర్.'
+          : "Premier bespoke tattoo studio led by master artist Arun. Master artistry, fine line precision, and clinical hygiene."}
       </p>
 
       {/* 3. Primary & Secondary CTAs */}
@@ -139,7 +139,7 @@ export const EntranceZone: React.FC<EntranceZoneProps> = ({ onEnter, onOpenBooki
                   SERVICES & SIGNATURE STYLES
                 </h3>
                 <p className="text-xs text-zinc-400 font-sans mt-0.5">
-                  Bespoke fine-art disciplines practiced in our Bandar Road studio
+                  Bespoke fine-art disciplines practiced at Arun Tattoos
                 </p>
               </div>
             </div>

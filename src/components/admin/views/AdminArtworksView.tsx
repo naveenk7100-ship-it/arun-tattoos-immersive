@@ -10,7 +10,7 @@ export const AdminArtworksView: React.FC = () => {
   // New Artwork Form State
   const [newTitle, setNewTitle] = useState('');
   const [newCategory, setNewCategory] = useState('Portrait');
-  const [newArtist, setNewArtist] = useState('Nani Kumar');
+  const [newArtist, setNewArtist] = useState('Arun');
   const [newDescription, setNewDescription] = useState('');
   const [newPlacement, setNewPlacement] = useState('Inner Forearm');
   const [newStyle, setNewStyle] = useState('Greywash Realism');
@@ -278,8 +278,7 @@ export const AdminArtworksView: React.FC = () => {
                     onChange={(e) => setNewArtist(e.target.value)}
                     className="w-full px-3 py-2 rounded-xl bg-black border border-white/15 text-white focus:border-[#d4af37] focus:outline-none"
                   >
-                    <option value="Nani Kumar">Nani Kumar</option>
-                    <option value="Yeswanth">Yeswanth</option>
+                    <option value="Arun">Arun</option>
                   </select>
                 </div>
               </div>

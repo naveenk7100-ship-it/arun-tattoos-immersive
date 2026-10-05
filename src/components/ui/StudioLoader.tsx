@@ -74,8 +74,8 @@ export const StudioLoader: React.FC<StudioLoaderProps> = ({ onComplete, isReduce
           ARUN <span className="gold-gradient-text">TATTOOS</span>
         </h1>
 
-        <p className="font-cinzel text-xs tracking-[0.35em] text-[#d4af37] uppercase font-semibold mb-8">
-          INK YOUR STORY • VIJAYAWADA
+        <p className="font-cinzel text-xs tracking-[0.25em] text-[#d4af37] uppercase font-semibold mb-8">
+          CRAFTED IN INK. DEFINED BY YOU.
         </p>
 
         {/* Progress bar container */}

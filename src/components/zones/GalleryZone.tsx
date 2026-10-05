@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { GALLERY_ITEMS, STUDIO_VIDEOS, COVERUP_CASE_STUDY } from '../../data/studioData';
+import { GALLERY_ITEMS, STUDIO_VIDEOS } from '../../data/studioData';
 import type { GalleryArtwork, GalleryCategory } from '../../types';
 import { 
   Eye, 
   Sparkles, 
   Play, 
-  Layers, 
-  ShieldCheck, 
   Clock, 
-  SlidersHorizontal,
   ChevronRight,
   X
 } from 'lucide-react';
 import { ArtworkInspectorModal } from '../ui/ArtworkInspectorModal';
-import { BeforeAfterSlider } from '../ui/BeforeAfterSlider';
 import { useLanguage } from '../../translations/LanguageContext';
 
 interface GalleryZoneProps {
@@ -28,7 +24,6 @@ export const GalleryZone: React.FC<GalleryZoneProps> = ({
   const { t, language } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [activeArtwork, setActiveArtwork] = useState<GalleryArtwork | null>(null);
-  const [showCaseStudy, setShowCaseStudy] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
   const categories: { key: string; label: string }[] = [
@@ -47,7 +42,7 @@ export const GalleryZone: React.FC<GalleryZoneProps> = ({
     ? GALLERY_ITEMS
     : GALLERY_ITEMS.filter((item) => item.category === selectedCategory as GalleryCategory);
 
-  // Check initial URL hash (e.g. #art=art-01) on load for shareable link support
+  // Check initial URL hash (e.g. #art=work-1) on load for shareable link support
   useEffect(() => {
     const hash = window.location.hash;
     if (hash.startsWith('#art=')) {
@@ -108,7 +103,7 @@ export const GalleryZone: React.FC<GalleryZoneProps> = ({
       </div>
 
       {/* Master Artwork Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-16">
         {filteredItems.map((artwork) => (
           <div
             key={artwork.id}
@@ -166,152 +161,72 @@ export const GalleryZone: React.FC<GalleryZoneProps> = ({
         ))}
       </div>
 
-      {/* FEATURED CASE STUDY: COVER-UP BEFORE / AFTER SECTION */}
-      <div className="mb-16 p-6 sm:p-10 rounded-3xl subtle-glass-gold border border-[#d4af37]/30 shadow-2xl">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/10 mb-8">
-          <div>
-            <span className="text-xs font-mono text-[#d4af37] uppercase tracking-widest flex items-center gap-1.5">
-              <SlidersHorizontal className="w-4 h-4" />
-              {t.zones.gallery.beforeAfterTitle}
-            </span>
-            <h3 className={`text-2xl sm:text-3xl font-bold text-white mt-1 ${language === 'te' ? 'font-telugu' : 'font-cinzel'}`}>
-              {COVERUP_CASE_STUDY.title}
-            </h3>
-            <p className="text-xs text-zinc-400 font-mono mt-1">
-              {COVERUP_CASE_STUDY.subtitle}
-            </p>
-          </div>
-
-          <button
-            onClick={() => setShowCaseStudy(!showCaseStudy)}
-            className="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-mono text-zinc-200 flex items-center gap-2 border border-white/10 self-start md:self-auto transition-colors"
-          >
-            <Layers className="w-4 h-4 text-[#d4af37]" />
-            <span>{showCaseStudy ? 'Hide Case Study Roadmap' : 'Examine 4-Step Process'}</span>
-          </button>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Interactive Before & After Slider */}
-          <div className="lg:col-span-7">
-            <BeforeAfterSlider
-              beforeImage={COVERUP_CASE_STUDY.beforeImage!}
-              afterImage={COVERUP_CASE_STUDY.afterImage}
-              beforeLabel="2014 OLD SCAR / TRIBAL"
-              afterLabel="HEALED PHOENIX RESTORATION"
-            />
-          </div>
-
-          {/* Context & Description */}
-          <div className="lg:col-span-5 text-left space-y-4">
-            <div className="p-4 rounded-xl bg-black/40 border border-white/5 text-xs text-zinc-300 leading-relaxed font-sans">
-              <p>{COVERUP_CASE_STUDY.context}</p>
+      {/* STUDIO STORIES / VIDEO SECTION ARCHITECTURE (Rendered only if videos exist) */}
+      {STUDIO_VIDEOS.length > 0 && (
+        <div className="mb-10 text-left">
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <span className="text-xs font-mono text-[#d4af37] uppercase tracking-wider block">
+                CINEMATIC ARCHIVES
+              </span>
+              <h3 className={`text-2xl font-bold text-white ${language === 'te' ? 'font-telugu' : 'font-cinzel'}`}>
+                Studio Stories & Process Films
+              </h3>
             </div>
-
-            <div className="p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/20 text-xs text-emerald-300 font-mono flex items-start gap-2.5">
-              <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-              <span>{COVERUP_CASE_STUDY.outcome}</span>
-            </div>
-
-            <button
-              onClick={() => onOpenBookingWithStyle?.('Cover-up & Scar Camouflage', 'Yeswanth')}
-              className="w-full py-3.5 rounded-xl bg-[#d4af37] hover:bg-[#e5c158] text-black font-bold uppercase tracking-wider text-xs font-mono flex items-center justify-center gap-2 transition-all shadow-lg"
+            <a
+              href="https://www.youtube.com/@aruntattoostudio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-mono text-[#ffd885] hover:underline flex items-center gap-1"
             >
-              <span>Consult on Cover-up / Scar Camouflage</span>
-              <ChevronRight className="w-4 h-4" />
-            </button>
+              <span>YouTube @aruntattoostudio</span>
+              <ChevronRight className="w-3.5 h-3.5" />
+            </a>
           </div>
-        </div>
 
-        {/* Expandable 4-Step Process Roadmap */}
-        {showCaseStudy && (
-          <div className="mt-8 pt-8 border-t border-white/10 animate-in fade-in duration-300">
-            <h4 className="text-xs font-mono uppercase text-[#d4af37] tracking-wider mb-4">
-              Step-by-Step Restoration Methodology:
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
-              {COVERUP_CASE_STUDY.steps.map((st) => (
-                <div key={st.step} className="p-4 rounded-2xl bg-black/50 border border-white/5">
-                  <span className="text-[10px] font-mono text-[#d4af37] block mb-1">
-                    PHASE {st.step}
-                  </span>
-                  <h5 className="text-xs font-bold text-white mb-1.5 font-cinzel">
-                    {st.title}
-                  </h5>
-                  <p className="text-[11px] text-zinc-400 leading-relaxed">
-                    {st.detail}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {STUDIO_VIDEOS.map((vid) => (
+              <div
+                key={vid.id}
+                className="rounded-2xl overflow-hidden subtle-glass border border-white/10 flex flex-col justify-between"
+              >
+                <div className="relative aspect-video bg-black overflow-hidden group">
+                  <img
+                    src={vid.poster}
+                    alt={vid.title}
+                    className="w-full h-full object-cover filter brightness-90 group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <button
+                      onClick={() => setSelectedVideo(vid.id)}
+                      className="w-14 h-14 rounded-full bg-[#d4af37] text-black flex items-center justify-center shadow-2xl transform group-hover:scale-110 transition-transform"
+                      aria-label={`Play ${vid.title}`}
+                    >
+                      <Play className="w-6 h-6 fill-current ml-0.5" />
+                    </button>
+                  </div>
+                  <div className="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/70 text-[10px] font-mono text-white">
+                    {vid.duration}
+                  </div>
+                </div>
+
+                <div className="p-5">
+                  <div className="flex items-center justify-between text-[11px] font-mono text-[#d4af37] mb-1">
+                    <span>{vid.category}</span>
+                    <span>With {vid.artist}</span>
+                  </div>
+                  <h4 className="text-sm font-bold text-white mb-2 font-cinzel">
+                    {vid.title}
+                  </h4>
+                  <p className="text-xs text-zinc-400 leading-relaxed">
+                    {vid.description}
                   </p>
                 </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* STUDIO STORIES / VIDEO SECTION ARCHITECTURE */}
-      <div className="mb-10 text-left">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <span className="text-xs font-mono text-[#d4af37] uppercase tracking-wider block">
-              CINEMATIC ARCHIVES
-            </span>
-            <h3 className={`text-2xl font-bold text-white ${language === 'te' ? 'font-telugu' : 'font-cinzel'}`}>
-              Studio Stories & Process Films
-            </h3>
-          </div>
-          <a
-            href="https://www.youtube.com/@aruntattoostudio"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs font-mono text-[#ffd885] hover:underline flex items-center gap-1"
-          >
-            <span>YouTube @aruntattoostudio</span>
-            <ChevronRight className="w-3.5 h-3.5" />
-          </a>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {STUDIO_VIDEOS.map((vid) => (
-            <div
-              key={vid.id}
-              className="rounded-2xl overflow-hidden subtle-glass border border-white/10 flex flex-col justify-between"
-            >
-              <div className="relative aspect-video bg-black overflow-hidden group">
-                <img
-                  src={vid.poster}
-                  alt={vid.title}
-                  className="w-full h-full object-cover filter brightness-90 group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                  <button
-                    onClick={() => setSelectedVideo(vid.id)}
-                    className="w-14 h-14 rounded-full bg-[#d4af37] text-black flex items-center justify-center shadow-2xl transform group-hover:scale-110 transition-transform"
-                    aria-label={`Play ${vid.title}`}
-                  >
-                    <Play className="w-6 h-6 fill-current ml-0.5" />
-                  </button>
-                </div>
-                <div className="absolute bottom-3 right-3 px-2 py-0.5 rounded bg-black/70 text-[10px] font-mono text-white">
-                  {vid.duration}
-                </div>
               </div>
-
-              <div className="p-5">
-                <div className="flex items-center justify-between text-[11px] font-mono text-[#d4af37] mb-1">
-                  <span>{vid.category}</span>
-                  <span>With {vid.artist}</span>
-                </div>
-                <h4 className="text-sm font-bold text-white mb-2 font-cinzel">
-                  {vid.title}
-                </h4>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  {vid.description}
-                </p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* FULLSCREEN ARTWORK INSPECTOR MODAL WITH ZOOM LOUPE */}
       <ArtworkInspectorModal

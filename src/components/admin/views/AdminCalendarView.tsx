@@ -71,7 +71,7 @@ export const AdminCalendarView: React.FC<AdminCalendarViewProps> = ({ onOpenBook
             Studio Schedule & Appointments
           </h2>
           <p className="text-xs font-mono text-zinc-400 mt-1">
-            Visual calendar for Nani Kumar and Yeswanth stations
+            Visual calendar for Arun master station
           </p>
         </div>
 
@@ -83,8 +83,7 @@ export const AdminCalendarView: React.FC<AdminCalendarViewProps> = ({ onOpenBook
             className="px-3 py-2 rounded-xl bg-black/50 border border-white/15 text-xs text-white focus:border-[#d4af37] focus:outline-none"
           >
             <option value="ALL">All Artists</option>
-            <option value="Nani Kumar">Nani Kumar</option>
-            <option value="Yeswanth">Yeswanth</option>
+            <option value="Arun">Arun</option>
           </select>
 
           <div className="flex rounded-xl subtle-glass border border-white/10 p-1">

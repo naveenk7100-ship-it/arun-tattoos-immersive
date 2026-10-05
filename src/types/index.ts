@@ -210,28 +210,30 @@ export interface StudioContact {
   tagline: string;
   subheadline?: string;
   address: {
-    doorNo: string;
-    colony: string;
+    doorNo?: string;
+    colony?: string;
     landmark: string;
-    opposite: string;
-    road: string;
-    city: string;
-    pincode: string;
-    state: string;
-    country: string;
+    floor?: string;
+    opposite?: string;
+    road?: string;
+    city?: string;
+    pincode?: string;
+    state?: string;
+    country?: string;
     fullString: string;
+    googleMapsDirectionsUrl?: string;
   };
   phone: string;
   formattedPhone: string;
   secondaryPhone?: string;
   formattedSecondaryPhone?: string;
-  email: string;
+  email?: string;
   workingHours: string;
   socials: {
-    instagram: string;
-    facebook: string;
-    pinterest: string;
-    youtube: string;
+    instagram?: string;
+    facebook?: string;
+    pinterest?: string;
+    youtube?: string;
     whatsapp: string;
   };
 }

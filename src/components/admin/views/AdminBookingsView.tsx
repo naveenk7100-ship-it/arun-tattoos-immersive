@@ -117,8 +117,7 @@ export const AdminBookingsView: React.FC<AdminBookingsViewProps> = ({
             className="w-full px-3 py-2 rounded-xl bg-black/50 border border-white/15 text-xs text-white focus:border-[#d4af37] focus:outline-none"
           >
             <option value="ALL">All Artists</option>
-            <option value="Nani Kumar">Nani Kumar</option>
-            <option value="Yeswanth">Yeswanth</option>
+            <option value="Arun">Arun</option>
           </select>
         </div>
 

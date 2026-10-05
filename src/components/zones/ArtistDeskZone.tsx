@@ -74,7 +74,7 @@ export const ArtistDeskZone: React.FC<ArtistDeskZoneProps> = ({ onSelectArtistFo
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent" />
               <div className="absolute bottom-3 inset-x-3 text-left">
                 <span className="text-[10px] font-mono uppercase text-[#d4af37] tracking-widest block">
-                  VIJAYAWADA RESIDENT CRAFTSMAN
+                  MASTER TATTOO ARTIST
                 </span>
                 <div className="text-base font-bold text-white font-cinzel">
                   {selectedArtist.name}

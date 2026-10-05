@@ -211,9 +211,7 @@ export const BookingDetailModal: React.FC<BookingDetailModalProps> = ({
                   onChange={(e) => setSelectedArtist(e.target.value)}
                   className="w-full px-3 py-1.5 rounded-lg bg-black border border-white/15 text-xs text-white focus:border-[#d4af37] focus:outline-none"
                 >
-                  <option value="Nani Kumar">Nani Kumar (Founder • Portrait & Micro Art)</option>
-                  <option value="Yeswanth">Yeswanth (Resident • Realism & Cover-ups)</option>
-                  <option value="First Available Artist">First Available Artist</option>
+                  <option value="Arun">Arun (Owner & Master Artist)</option>
                 </select>
               </div>
               <div className="pt-1">
