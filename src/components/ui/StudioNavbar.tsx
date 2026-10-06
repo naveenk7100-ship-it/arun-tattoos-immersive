@@ -221,11 +221,18 @@ export const StudioNavbar: React.FC<StudioNavbarProps> = ({
           {/* Quick Call */}
           <a
             href={`tel:${STUDIO_CONTACT.phone}`}
-            aria-label="Call Arun Tattoo Studio"
-            className="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-full subtle-glass text-xs font-mono text-zinc-300 hover:text-white hover:border-[#d4af37]/40 transition-colors"
+            aria-label="Call Arun Tattoo Studio: +91 72072 02082"
+            className="hidden sm:flex items-center justify-center gap-2.5 px-3.5 sm:px-4 py-1.5 rounded-full subtle-glass border border-white/15 hover:border-[#d4af37]/60 text-zinc-300 hover:text-white transition-all duration-300 shadow-md shadow-black/40 shrink-0 select-none group min-w-[130px]"
           >
-            <Phone className="w-3.5 h-3.5 text-[#d4af37]" />
-            <span className="hidden xl:inline">{STUDIO_CONTACT.formattedPhone}</span>
+            <Phone className="w-3.5 h-3.5 text-[#d4af37] shrink-0 group-hover:scale-110 transition-transform" />
+            <div className="flex flex-col items-start justify-center leading-none text-left">
+              <span className="text-[10px] font-mono font-medium text-[#d4af37] tracking-wider leading-none">
+                +91
+              </span>
+              <span className="text-xs font-mono font-semibold text-zinc-100 tracking-wider leading-tight mt-0.5 whitespace-nowrap">
+                72072 02082
+              </span>
+            </div>
           </a>
 
           {/* WhatsApp Direct */}
@@ -234,16 +241,16 @@ export const StudioNavbar: React.FC<StudioNavbarProps> = ({
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat on WhatsApp"
-            className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-full subtle-glass text-xs font-mono text-emerald-400 hover:border-emerald-500/40 transition-colors"
+            className="hidden md:flex items-center gap-1.5 px-3.5 py-2 rounded-full subtle-glass text-xs font-mono text-emerald-400 hover:border-emerald-500/40 transition-colors shrink-0"
           >
             <MessageSquare className="w-3.5 h-3.5" />
-            <span className="hidden md:inline">{t.nav.whatsApp}</span>
+            <span className="hidden xl:inline">{t.nav.whatsApp}</span>
           </a>
 
           {/* Primary Book Session CTA */}
           <button
             onClick={onOpenBooking}
-            className="px-5 py-2 rounded-full border border-white/30 hover:border-[#d4af37] text-white hover:text-black hover:bg-[#d4af37] text-xs font-sans tracking-widest uppercase font-semibold transition-all duration-300"
+            className="px-4 sm:px-5 py-2 rounded-full border border-white/30 hover:border-[#d4af37] text-white hover:text-black hover:bg-[#d4af37] text-xs font-sans tracking-widest uppercase font-semibold transition-all duration-300 shrink-0"
           >
             BOOK NOW
           </button>
