@@ -9,7 +9,9 @@ import {
   Menu, 
   X, 
   Sparkles,
-  Globe
+  Globe,
+  Maximize2,
+  Minimize2
 } from 'lucide-react';
 import { STUDIO_CONTACT, STUDIO_ZONES } from '../../data/studioData';
 import type { StudioZone, StudioZoneId } from '../../types';
@@ -31,10 +33,19 @@ export const StudioNavbar: React.FC<StudioNavbarProps> = ({
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [isFloorPlanOpen, setIsFloorPlanOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const toggleSound = () => {
     const active = studioAudio.toggle();
     setIsPlayingAudio(active);
+  };
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen?.().then(() => setIsFullscreen(true)).catch(() => {});
+    } else {
+      document.exitFullscreen?.().then(() => setIsFullscreen(false)).catch(() => {});
+    }
   };
 
   const handleZoneClick = (zoneId: StudioZoneId) => {
@@ -183,6 +194,20 @@ export const StudioNavbar: React.FC<StudioNavbarProps> = ({
               </>
             ) : (
               <VolumeX className="w-4 h-4 text-zinc-400" />
+            )}
+          </button>
+
+          {/* Fullscreen Immersion Toggle */}
+          <button
+            onClick={toggleFullscreen}
+            aria-label="Toggle fullscreen studio view"
+            className="p-2.5 rounded-full subtle-glass hover:border-[#d4af37]/40 transition-colors text-zinc-300 hover:text-[#d4af37] focus:outline-none"
+            title={isFullscreen ? 'Exit Fullscreen' : 'Fullscreen Atelier View'}
+          >
+            {isFullscreen ? (
+              <Minimize2 className="w-4 h-4 text-[#d4af37]" />
+            ) : (
+              <Maximize2 className="w-4 h-4 text-zinc-400" />
             )}
           </button>
 
