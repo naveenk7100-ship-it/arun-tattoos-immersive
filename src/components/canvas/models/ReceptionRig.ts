@@ -81,17 +81,18 @@ export function createReceptionRig(materials: StudioMaterialSet): THREE.Group {
   logoGroup.add(backplateMesh);
 
   // Front Circular Face Disc displaying Authentic Arun Tattoos Logo (0.70m diameter)
-  const logoFaceGeo = new THREE.CylinderGeometry(0.345, 0.345, 0.012, 64);
-  logoFaceGeo.rotateX(Math.PI / 2);
+  // CircleGeometry natively faces +Z and maps UV (0,0 bottom-left to 1,1 top-right) for a perfectly upright logo
+  const logoFaceGeo = new THREE.CircleGeometry(0.345, 64);
   const logoFaceMat = new THREE.MeshStandardMaterial({
     color: 0xffffff,
     metalness: 0.22,
     roughness: 0.28,
     emissive: 0x221808,
     emissiveIntensity: 0.45,
+    side: THREE.FrontSide,
   });
   const logoFaceMesh = new THREE.Mesh(logoFaceGeo, logoFaceMat);
-  logoFaceMesh.position.z = 0.033;
+  logoFaceMesh.position.z = 0.036;
   logoGroup.add(logoFaceMesh);
 
   // Load authentic Arun Tattoos logo texture

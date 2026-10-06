@@ -27,21 +27,16 @@ export const EntranceZone: React.FC<EntranceZoneProps> = ({ onEnter, onOpenBooki
         
         {/* Left: Atmospheric Brand Typography sitting in negative space */}
         <div className="text-left max-w-lg">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full subtle-glass border border-[#d4af37]/30 text-[10px] sm:text-xs font-mono text-[#d4af37] mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="tracking-widest uppercase">VIJAYAWADA ATELIER • OPEN TODAY</span>
-          </div>
-
-          <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-[0.18em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)] uppercase leading-none">
-            ARUN TATTOOS
+          <h1 className="font-cinzel text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-[0.18em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.9)] uppercase leading-[1.05]">
+            ARUN<br />TATTOOS
           </h1>
 
-          <p className="font-mono text-xs sm:text-sm md:text-base tracking-[0.24em] md:tracking-[0.28em] text-[#d4af37] font-medium mt-2.5 uppercase drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+          <p className="font-mono text-xs sm:text-sm md:text-base tracking-[0.24em] md:tracking-[0.28em] text-[#d4af37] font-medium mt-3 uppercase drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
             CRAFTED IN INK. DEFINED BY YOU.
           </p>
 
-          <p className="text-[11px] sm:text-xs tracking-[0.2em] text-zinc-400 font-sans uppercase mt-1">
-            PRECISION • ARTISTRY • STERILITY
+          <p className="text-[11px] sm:text-xs tracking-[0.24em] text-zinc-400 font-mono uppercase mt-1.5">
+            PRECISION. ARTISTRY. STERILITY.
           </p>
         </div>
 
