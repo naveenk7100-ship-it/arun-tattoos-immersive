@@ -2,12 +2,14 @@ import React from 'react';
 import { 
   ArrowUp, 
   ChevronRight, 
-  Sparkles, 
-  ShieldCheck, 
-  Award, 
-  HeartHandshake 
+  Fingerprint, 
+  Shield, 
+  Star, 
+  Heart, 
+  Mouse 
 } from 'lucide-react';
 import { useLanguage } from '../../translations/LanguageContext';
+import { assetUrl } from '../../utils/assetUrl';
 
 interface ReferenceHeroProps {
   onStepInside: () => void;
@@ -17,174 +19,162 @@ interface ReferenceHeroProps {
 
 export const ReferenceHero: React.FC<ReferenceHeroProps> = ({
   onStepInside,
-  onOpenBooking,
   onScrollDown,
 }) => {
   const { language } = useLanguage();
 
   return (
-    <div className={`w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-between select-none ${language === 'te' ? 'font-telugu' : ''}`}>
+    <div className={`relative w-full min-h-[92vh] flex flex-col justify-between pt-24 pb-8 px-4 sm:px-8 lg:px-12 select-none ${language === 'te' ? 'font-telugu' : ''}`}>
       
-      {/* Main 3-Column Studio Architectural Composition */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center flex-1 my-auto pt-4 pb-6">
+      {/* 3-Column Wide Cinematic Composition matching Reference Image */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-4 items-center flex-1 my-auto w-full">
         
-        {/* Left Column: Illuminated Brand Wall & Artistic Identity */}
-        <div className="lg:col-span-4 flex flex-col justify-between items-start text-left space-y-6">
-          <div className="space-y-4">
-            {/* Subtle Brand Chip */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full subtle-glass border border-[#d4af37]/30 text-[10px] font-mono text-[#d4af37] tracking-widest uppercase">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37] animate-pulse" />
-              <span>PRIVATE ATELIER • APPOINTMENTS & CONSULTATION</span>
-            </div>
+        {/* ========================================================================= */}
+        {/* LEFT COLUMN: ILLUMINATED MURAL WALL & BRUSH LOGO */}
+        {/* ========================================================================= */}
+        <div className="lg:col-span-4 flex flex-col justify-between items-start text-left space-y-8 relative z-10">
+          
+          {/* Background Wall Texture & Portrait Silhouette Overlay */}
+          <div className="relative">
+            {/* Subtle background mural portrait shadow */}
+            <div 
+              className="absolute -top-16 -left-12 w-64 h-64 sm:w-80 sm:h-80 pointer-events-none opacity-20 filter grayscale contrast-150 mix-blend-screen bg-cover bg-no-repeat"
+              style={{ backgroundImage: `url(${assetUrl('/images/gallery/realism-portrait-tribute.png')})` }}
+            />
 
-            {/* Backlit Large Brand Title */}
-            <div className="relative">
-              <div className="absolute -inset-4 bg-[radial-gradient(circle_at_left,_rgba(212,175,55,0.18)_0%,transparent_70%)] pointer-events-none" />
-              <h1 className="relative text-5xl sm:text-6xl lg:text-7xl font-cinzel font-black tracking-tight text-white uppercase leading-[0.95]">
-                ARUN <br />
-                <span className="gold-gradient-text tracking-widest">TATTOOS</span>
+            {/* Glowing Neon Brand Mark */}
+            <div className="relative space-y-1">
+              <h1 className="font-brush text-6xl sm:text-7xl lg:text-8xl text-white tracking-wide filter drop-shadow-[0_0_35px_rgba(255,255,255,0.45)] leading-tight">
+                ARUN
               </h1>
+              
+              <div className="font-sans text-xl sm:text-2xl lg:text-3xl tracking-[0.45em] text-white font-medium pl-1">
+                TATTOOS
+              </div>
+
+              {/* Tagline matching strict rule: CRAFTED IN INK. DEFINED BY YOU. */}
+              <p className="font-sans text-xs sm:text-sm tracking-[0.3em] text-[#d4af37] font-semibold uppercase mt-3 pl-1">
+                CRAFTED IN INK. DEFINED BY YOU.
+              </p>
             </div>
-
-            {/* Premium Tagline (Reference Style) */}
-            <p className="font-cinzel text-base sm:text-lg lg:text-xl tracking-[0.25em] text-[#d4af37] font-semibold uppercase leading-snug">
-              CRAFTED IN INK. DEFINED BY YOU.
-            </p>
-
-            <p className="text-xs sm:text-sm text-zinc-300 font-sans max-w-sm leading-relaxed">
-              {language === 'te'
-                ? 'శరీర నిర్మాణం మరియు వ్యక్తిత్వానికి తగినట్లుగా రూపొందించిన అత్యున్నత ప్రమాణాల శాశ్వత చిత్రకళ.'
-                : 'Where fine-art drafting meets sterile surgical precision. Every piece is an original concept engineered for anatomical harmony.'}
-            </p>
           </div>
 
-          {/* Mouse / Swipe Exploration Indicator & Atmospheric Floor Plant Representation */}
-          <div className="pt-2 flex items-center gap-6">
-            <div className="flex items-center gap-2.5 text-[11px] font-mono text-zinc-400">
-              <div className="w-6 h-9 rounded-full border border-white/20 flex items-start justify-center p-1.5">
-                <div className="w-1 h-2 rounded-full bg-[#d4af37] animate-bounce" />
-              </div>
+          {/* Plant Sanctuary Ambience & Exploration Indicator */}
+          <div className="space-y-4 pt-4">
+            {/* Atmospheric Plant representation on floor */}
+            <div className="flex items-center gap-2.5 text-zinc-400">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 shadow-[0_0_12px_rgba(16,185,129,0.6)]" />
+              <span className="text-[11px] font-sans tracking-wider uppercase text-zinc-300">
+                PRIVATE ATELIER SANCTUARY
+              </span>
+            </div>
+
+            {/* Mouse / Swipe exploration pill */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-black/50 backdrop-blur-md border border-white/10 text-xs font-sans text-zinc-300 shadow-xl">
+              <Mouse className="w-4 h-4 text-zinc-200 animate-bounce" />
               <span>Use your mouse or swipe to explore</span>
             </div>
-
-            {/* Potted Studio Plant Detail (Stylized Architectural Badge) */}
-            <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/40 border border-white/5 text-[10px] font-mono text-zinc-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
-              <span>Sanctuary Ambience</span>
-            </div>
           </div>
+
         </div>
 
-        {/* Center Column: Direct Perspective Portal into 3D Studio */}
-        <div className="lg:col-span-4 flex flex-col items-center justify-center text-center py-6 lg:py-0">
-          <div className="relative group cursor-pointer" onClick={onStepInside}>
-            {/* Architectural Doorway Glow Framing */}
-            <div className="w-64 sm:w-72 h-80 sm:h-96 rounded-3xl border-2 border-[#d4af37]/40 bg-gradient-to-b from-black/40 via-transparent to-black/80 backdrop-blur-[2px] p-6 flex flex-col justify-between items-center shadow-2xl shadow-black/90 group-hover:border-[#d4af37] transition-all duration-500 transform group-hover:scale-[1.02]">
-              
-              {/* Top Doorway Arch Header */}
-              <div className="flex items-center gap-2 text-[10px] font-mono tracking-widest text-[#ffd885] uppercase">
-                <Sparkles className="w-3 h-3 text-[#d4af37]" />
-                <span>STUDIO THRESHOLD</span>
-              </div>
+        {/* ========================================================================= */}
+        {/* CENTER COLUMN: DIRECT UNOBSTRUCTED PORTAL TO 3D STUDIO */}
+        {/* ========================================================================= */}
+        <div className="lg:col-span-4 flex flex-col items-center justify-end text-center h-full min-h-[280px] lg:min-h-[460px] pb-6 relative z-10">
+          
+          {/* STEP INSIDE CTA on the studio threshold floor */}
+          <div 
+            onClick={onStepInside}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') onStepInside(); }}
+            className="group cursor-pointer flex flex-col items-center gap-2.5 select-none transition-transform hover:scale-105"
+          >
+            {/* Circular glowing upward arrow */}
+            <div className="w-12 h-12 rounded-full border border-white/40 flex items-center justify-center text-white group-hover:border-[#d4af37] group-hover:bg-[#d4af37]/20 transition-all bg-black/40 backdrop-blur-md shadow-2xl shadow-black">
+              <ArrowUp className="w-5 h-5 text-white group-hover:text-[#d4af37] transition-colors" />
+            </div>
 
-              {/* Center Portal Focus (Visual Anchor over Three.js Canvas) */}
-              <div className="text-center space-y-2">
-                <div className="w-16 h-16 rounded-full mx-auto subtle-glass-gold border border-[#d4af37] flex items-center justify-center text-[#d4af37] shadow-lg group-hover:scale-110 transition-transform">
-                  <ArrowUp className="w-6 h-6 animate-pulse" />
-                </div>
-                <div className="font-cinzel text-xs tracking-[0.2em] text-white uppercase font-bold">
-                  PORTAL TO SANCTUARY
-                </div>
-                <p className="text-[10px] text-zinc-400 font-mono">
-                  Inspect 9 connected zones
-                </p>
-              </div>
-
-              {/* Step Inside Button (Matching Reference Image) */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onStepInside();
-                }}
-                className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-[#d4af37] via-[#e5c158] to-[#b38728] text-black font-bold uppercase tracking-widest text-xs font-mono flex items-center justify-center gap-2 shadow-xl shadow-[#d4af37]/30 transform group-hover:-translate-y-0.5 transition-all"
-              >
-                <ArrowUp className="w-4 h-4" />
-                <span>STEP INSIDE</span>
-              </button>
-
+            {/* Pill capsule STEP INSIDE */}
+            <div className="px-6 py-2 rounded-full border border-white/30 bg-black/50 backdrop-blur-md text-xs font-sans tracking-[0.25em] text-white uppercase group-hover:border-[#d4af37] group-hover:text-[#ffd885] transition-all shadow-xl">
+              STEP INSIDE
             </div>
           </div>
+
         </div>
 
-        {/* Right Column: Studio Value Pillars & Editorial Benchmark */}
-        <div className="lg:col-span-4 flex flex-col justify-between items-start lg:items-end text-left lg:text-right space-y-6">
+        {/* ========================================================================= */}
+        {/* RIGHT COLUMN: VALUE PILLARS & SCROLL DOWN */}
+        {/* ========================================================================= */}
+        <div className="lg:col-span-4 flex flex-col justify-between items-start lg:items-end text-left lg:text-right space-y-8 relative z-10">
+          
           <div className="space-y-4">
-            <h2 className="font-cinzel text-2xl sm:text-3xl text-white font-bold tracking-wide uppercase leading-snug">
-              MORE THAN JUST A TATTOO <br />
-              <span className="text-zinc-400 font-normal">IT'S A PART OF YOU</span>
-            </h2>
-
-            <p className="text-xs text-zinc-400 font-sans max-w-sm leading-relaxed">
-              Every design is meticulously tailored to individual anatomical lines, utilizing medical-grade hygiene protocols and single-use cartridge needles.
-            </p>
-          </div>
-
-          {/* 4 Minimalist Luxury Icon Badges (Matching Reference Image) */}
-          <div className="grid grid-cols-2 gap-3 w-full max-w-sm">
-            
-            <div className="p-3.5 rounded-2xl subtle-glass border border-white/10 flex flex-col items-center text-center group hover:border-[#d4af37]/50 transition-colors">
-              <Sparkles className="w-5 h-5 text-[#d4af37] mb-1.5" />
-              <span className="text-[10px] font-mono tracking-wider text-white font-bold uppercase block">
-                CUSTOM DESIGNS
-              </span>
-              <span className="text-[9px] text-zinc-400 mt-0.5">Original Ink Concepts</span>
+            {/* Editorial Heading */}
+            <div className="space-y-1">
+              <h2 className="font-sans text-lg sm:text-xl lg:text-2xl font-normal tracking-wider text-white uppercase leading-snug">
+                MORE THAN JUST A TATTOO
+              </h2>
+              <p className="font-sans text-sm sm:text-base tracking-[0.2em] text-zinc-400 uppercase font-light">
+                IT'S A PART OF YOU
+              </p>
             </div>
 
-            <div className="p-3.5 rounded-2xl subtle-glass border border-white/10 flex flex-col items-center text-center group hover:border-emerald-500/50 transition-colors">
-              <ShieldCheck className="w-5 h-5 text-emerald-400 mb-1.5" />
-              <span className="text-[10px] font-mono tracking-wider text-white font-bold uppercase block">
-                STERILE & SAFE
-              </span>
-              <span className="text-[9px] text-zinc-400 mt-0.5">Hospital-Grade Standards</span>
-            </div>
-
-            <div className="p-3.5 rounded-2xl subtle-glass border border-white/10 flex flex-col items-center text-center group hover:border-[#ffd885]/50 transition-colors">
-              <Award className="w-5 h-5 text-[#ffd885] mb-1.5" />
-              <span className="text-[10px] font-mono tracking-wider text-white font-bold uppercase block">
-                MASTER ARTISTRY
-              </span>
-              <span className="text-[9px] text-zinc-400 mt-0.5">Owner & Master Artist Arun</span>
-            </div>
-
-            <div className="p-3.5 rounded-2xl subtle-glass border border-white/10 flex flex-col items-center text-center group hover:border-[#d4af37]/50 transition-colors">
-              <HeartHandshake className="w-5 h-5 text-[#d4af37] mb-1.5" />
-              <span className="text-[10px] font-mono tracking-wider text-white font-bold uppercase block">
-                LIFETIME SUPPORT
-              </span>
-              <span className="text-[9px] text-zinc-400 mt-0.5">Dedicated Aftercare Regimen</span>
-            </div>
-
-          </div>
-
-          {/* Action Button & Scroll Down Indicator */}
-          <div className="flex items-center gap-4 w-full justify-start lg:justify-end pt-2">
-            <button
-              onClick={onOpenBooking}
-              className="px-6 py-2.5 rounded-full subtle-glass border border-[#d4af37]/50 hover:bg-[#d4af37]/15 text-xs font-mono tracking-wider text-[#ffd885] uppercase transition-colors"
-            >
-              Consult Arun
-            </button>
-
-            <button
-              onClick={onScrollDown}
-              className="group flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-white transition-colors"
-            >
-              <div className="w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-[#d4af37] group-hover:bg-[#d4af37]/20 transition-all">
-                <ChevronRight className="w-3.5 h-3.5 text-[#d4af37] rotate-90" />
+            {/* 4 Minimalist Luxury Icon Badges in a horizontal row */}
+            <div className="grid grid-cols-4 gap-4 sm:gap-6 pt-4 text-center">
+              
+              <div className="flex flex-col items-center group">
+                <Fingerprint className="w-5 h-5 text-zinc-300 group-hover:text-[#d4af37] transition-colors mb-2" />
+                <span className="text-[9px] font-mono tracking-wider text-zinc-400 group-hover:text-white uppercase leading-tight">
+                  CUSTOM<br />DESIGNS
+                </span>
               </div>
-              <span className="tracking-widest uppercase text-[10px]">SCROLL DOWN</span>
-            </button>
+
+              <div className="flex flex-col items-center group">
+                <Shield className="w-5 h-5 text-zinc-300 group-hover:text-emerald-400 transition-colors mb-2" />
+                <span className="text-[9px] font-mono tracking-wider text-zinc-400 group-hover:text-white uppercase leading-tight">
+                  STERILE &<br />SAFE
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center group">
+                <Star className="w-5 h-5 text-zinc-300 group-hover:text-[#ffd885] transition-colors mb-2" />
+                <span className="text-[9px] font-mono tracking-wider text-zinc-400 group-hover:text-white uppercase leading-tight">
+                  EXPERT<br />ARTISTS
+                </span>
+              </div>
+
+              <div className="flex flex-col items-center group">
+                <Heart className="w-5 h-5 text-zinc-300 group-hover:text-[#d4af37] transition-colors mb-2" />
+                <span className="text-[9px] font-mono tracking-wider text-zinc-400 group-hover:text-white uppercase leading-tight">
+                  LIFETIME<br />SUPPORT
+                </span>
+              </div>
+
+            </div>
+
+            {/* Dark leather bench waiting visual element */}
+            <div className="hidden lg:block w-72 h-14 rounded-xl bg-gradient-to-r from-black/80 to-[#121217] border border-white/5 ml-auto relative overflow-hidden shadow-2xl">
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.06)_0%,transparent_70%)]" />
+              <div className="absolute bottom-2 right-3 text-[9px] font-mono text-zinc-500 uppercase tracking-widest">
+                CONSULTATION BENCH
+              </div>
+            </div>
           </div>
+
+          {/* Far bottom right: SCROLL DOWN trigger */}
+          <button
+            onClick={onScrollDown}
+            className="flex items-center gap-3 group text-right pt-4 cursor-pointer focus:outline-none"
+          >
+            <div className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center group-hover:border-[#d4af37] group-hover:scale-110 transition-all bg-black/40 backdrop-blur-sm">
+              <ChevronRight className="w-4 h-4 text-zinc-300 group-hover:text-[#d4af37] transition-colors" />
+            </div>
+            <div className="text-[10px] font-mono tracking-widest text-zinc-400 group-hover:text-white uppercase flex flex-col text-left leading-tight">
+              <span>SCROLL</span>
+              <span>DOWN</span>
+            </div>
+          </button>
 
         </div>
 

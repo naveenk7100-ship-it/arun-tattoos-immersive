@@ -4,7 +4,6 @@ import {
   VolumeX, 
   Compass, 
   Phone, 
-  Calendar, 
   MessageSquare, 
   Menu, 
   X, 
@@ -67,9 +66,9 @@ export const StudioNavbar: React.FC<StudioNavbarProps> = ({
         {/* Brand & Crest */}
         <div 
           onClick={() => handleZoneClick('entrance')}
-          className="cursor-pointer group flex items-center gap-3.5 select-none"
+          className="cursor-pointer group flex items-center gap-3 select-none"
         >
-          <div className="w-10 h-10 rounded-full border border-[#d4af37]/60 bg-[#121217] flex items-center justify-center transition-transform duration-500 group-hover:scale-105 group-hover:border-[#d4af37] shadow-lg shadow-black/80 overflow-hidden">
+          <div className="w-9 h-9 rounded-full border border-[#d4af37]/60 bg-[#121217] flex items-center justify-center transition-transform duration-500 group-hover:scale-105 group-hover:border-[#d4af37] shadow-lg shadow-black/80 overflow-hidden shrink-0">
             {STUDIO_CONTACT.logoUrl ? (
               <img
                 src={STUDIO_CONTACT.logoUrl}
@@ -80,69 +79,75 @@ export const StudioNavbar: React.FC<StudioNavbarProps> = ({
                 }}
               />
             ) : (
-              <span className="font-cinzel text-[#d4af37] text-sm font-bold tracking-wider">AT</span>
+              <span className="font-cinzel text-[#d4af37] text-xs font-bold tracking-wider">AT</span>
             )}
           </div>
           <div className="flex flex-col">
-            <span className="font-cinzel tracking-[0.22em] text-sm md:text-base font-bold text-white group-hover:text-[#ffd67a] transition-colors">
-              ARUN TATTOOS
+            <span className="font-brush text-lg sm:text-xl text-white tracking-wider leading-none group-hover:text-[#ffd67a] transition-colors">
+              ARUN
             </span>
-            <span className="text-[10px] tracking-[0.28em] text-[#a1a1aa] uppercase font-mono">
-              {t.nav.brandSubtitle}
+            <span className="text-[9px] tracking-[0.38em] text-zinc-400 uppercase font-sans font-semibold mt-0.5">
+              TATTOOS
             </span>
           </div>
         </div>
 
-        {/* Center: Primary Navigation Links & Current Zone Pill */}
-        <nav className="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full subtle-glass border border-white/10 shadow-2xl">
+        {/* Center: Primary Navigation Links */}
+        <nav className="hidden xl:flex items-center gap-8 text-xs font-sans font-medium tracking-widest uppercase text-zinc-300">
           <button
             onClick={() => handleZoneClick('entrance')}
-            className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide uppercase transition-colors ${
-              currentZone.id === 'entrance' ? 'bg-[#d4af37] text-black font-bold' : 'text-zinc-300 hover:text-white hover:bg-white/5'
+            className={`transition-colors hover:text-white relative py-1 ${
+              currentZone.id === 'entrance' ? 'text-white font-bold' : ''
             }`}
           >
-            Explore
+            EXPLORE
+            {currentZone.id === 'entrance' && (
+              <span className="absolute bottom-0 inset-x-0 h-0.5 bg-[#d4af37] rounded-full" />
+            )}
           </button>
           <button
             onClick={() => handleZoneClick('reception')}
-            className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide uppercase transition-colors ${
-              currentZone.id === 'reception' ? 'bg-[#d4af37] text-black font-bold' : 'text-zinc-300 hover:text-white hover:bg-white/5'
+            className={`transition-colors hover:text-white relative py-1 ${
+              currentZone.id === 'reception' ? 'text-white font-bold' : ''
             }`}
           >
-            Services
+            SERVICES
+            {currentZone.id === 'reception' && (
+              <span className="absolute bottom-0 inset-x-0 h-0.5 bg-[#d4af37] rounded-full" />
+            )}
           </button>
           <button
             onClick={() => handleZoneClick('gallery')}
-            className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide uppercase transition-colors ${
-              currentZone.id === 'gallery' ? 'bg-[#d4af37] text-black font-bold' : 'text-zinc-300 hover:text-white hover:bg-white/5'
+            className={`transition-colors hover:text-white relative py-1 ${
+              currentZone.id === 'gallery' ? 'text-white font-bold' : ''
             }`}
           >
-            Gallery
+            GALLERY
+            {currentZone.id === 'gallery' && (
+              <span className="absolute bottom-0 inset-x-0 h-0.5 bg-[#d4af37] rounded-full" />
+            )}
           </button>
           <button
             onClick={() => handleZoneClick('artist-desk')}
-            className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide uppercase transition-colors ${
-              currentZone.id === 'artist-desk' ? 'bg-[#d4af37] text-black font-bold' : 'text-zinc-300 hover:text-white hover:bg-white/5'
+            className={`transition-colors hover:text-white relative py-1 ${
+              currentZone.id === 'artist-desk' ? 'text-white font-bold' : ''
             }`}
           >
-            About
+            ABOUT
+            {currentZone.id === 'artist-desk' && (
+              <span className="absolute bottom-0 inset-x-0 h-0.5 bg-[#d4af37] rounded-full" />
+            )}
           </button>
           <button
             onClick={() => handleZoneClick('booking-area')}
-            className={`px-3 py-1 rounded-full text-xs font-medium tracking-wide uppercase transition-colors ${
-              currentZone.id === 'booking-area' ? 'bg-[#d4af37] text-black font-bold' : 'text-zinc-300 hover:text-white hover:bg-white/5'
+            className={`transition-colors hover:text-white relative py-1 ${
+              currentZone.id === 'booking-area' ? 'text-white font-bold' : ''
             }`}
           >
-            Booking
-          </button>
-          <div className="w-px h-4 bg-white/15 mx-1" />
-          <button
-            onClick={() => setIsFloorPlanOpen(!isFloorPlanOpen)}
-            className="px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/10 text-[11px] uppercase font-mono tracking-wider text-[#d4af37] hover:text-white transition-colors flex items-center gap-1.5"
-            title={t.nav.floorPlanTitle}
-          >
-            <Compass className="w-3.5 h-3.5 text-[#d4af37]" />
-            <span>Floor Plan</span>
+            BOOKING
+            {currentZone.id === 'booking-area' && (
+              <span className="absolute bottom-0 inset-x-0 h-0.5 bg-[#d4af37] rounded-full" />
+            )}
           </button>
         </nav>
 
@@ -236,12 +241,9 @@ export const StudioNavbar: React.FC<StudioNavbarProps> = ({
           {/* Primary Book Session CTA */}
           <button
             onClick={onOpenBooking}
-            className="relative group overflow-hidden px-4 md:px-5 py-2 rounded-full bg-gradient-to-r from-[#d4af37] to-[#b38728] text-black font-semibold text-xs md:text-sm tracking-wide shadow-lg shadow-[#d4af37]/20 hover:shadow-[#d4af37]/40 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0"
+            className="px-5 py-2 rounded-full border border-white/30 hover:border-[#d4af37] text-white hover:text-black hover:bg-[#d4af37] text-xs font-sans tracking-widest uppercase font-semibold transition-all duration-300"
           >
-            <span className="relative z-10 flex items-center gap-1.5 font-sans">
-              <Calendar className="w-3.5 h-3.5 text-black" />
-              {t.nav.bookSession}
-            </span>
+            BOOK NOW
           </button>
 
           {/* Mobile Menu Button */}

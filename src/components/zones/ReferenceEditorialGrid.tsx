@@ -2,381 +2,315 @@ import React, { useState } from 'react';
 import { 
   Sparkles, 
   ArrowRight, 
-  Calendar, 
-  CheckCircle2, 
-  ChevronRight, 
   PenTool, 
   Layers, 
   ShieldCheck, 
-  HeartHandshake, 
-  Flame
+  HeartHandshake 
 } from 'lucide-react';
 import { assetUrl } from '../../utils/assetUrl';
 import { useLanguage } from '../../translations/LanguageContext';
 import { studioAudio } from '../../utils/audio';
 
 interface ReferenceEditorialGridProps {
-  onOpenBooking: (service?: string) => void;
+  onOpenBooking: (service?: string, date?: string) => void;
   onViewAllServices: () => void;
   onLearnJourney: () => void;
+  onSelectArtworkModal?: (imageUrl: string, title: string) => void;
 }
 
 export const ReferenceEditorialGrid: React.FC<ReferenceEditorialGridProps> = ({
   onOpenBooking,
   onViewAllServices,
   onLearnJourney,
+  onSelectArtworkModal,
 }) => {
   const { language } = useLanguage();
 
-  // Quick booking mini-form state
   const [selectedService, setSelectedService] = useState('Custom Tattoos');
-  const [preferredDate, setPreferredDate] = useState('');
-  const [timeSlot, setTimeSlot] = useState('Afternoon');
+  const [selectedDate, setSelectedDate] = useState('');
 
-  const services = [
+  // 6 Authentic Style Tiles matching Reference Column 1
+  const styles = [
     {
-      title: 'Realism',
-      teluguTitle: 'రియలిజం పోర్ట్రెయిట్',
-      style: 'Lifelike Shading',
+      name: 'REALISM',
+      teluguName: 'రియలిజం',
       image: assetUrl('/images/gallery/realism-portrait-tribute.png'),
     },
     {
-      title: 'Black & Grey',
-      teluguTitle: 'బ్లాక్ & గ్రే',
-      style: 'Shiva & Devotional',
+      name: 'BLACK & GREY',
+      teluguName: 'బ్లాక్ & గ్రే',
       image: assetUrl('/images/gallery/shiva-mahakal-trishul.png'),
     },
     {
-      title: 'Fine Line',
-      teluguTitle: 'ఫైన్ లైన్',
-      style: 'Geometric Band',
+      name: 'FINE LINE',
+      teluguName: 'ఫైన్ లైన్',
       image: assetUrl('/images/gallery/compass-geometric-band.png'),
     },
     {
-      title: 'Sacred Art',
-      teluguTitle: 'సేక్రెడ్ బ్యాక్‌పీస్',
-      style: 'Kali Goddess Piece',
+      name: 'MINIMAL',
+      teluguName: 'మినిమల్',
+      image: assetUrl('/images/gallery/compass-geometric-band.png'),
+    },
+    {
+      name: 'PORTRAIT',
+      teluguName: 'పోర్ట్రెయిట్',
+      image: assetUrl('/images/gallery/realism-portrait-tribute.png'),
+    },
+    {
+      name: 'CUSTOM',
+      teluguName: 'కస్టమ్',
       image: assetUrl('/images/gallery/kali-goddess-backpiece.jpg'),
     },
-    {
-      title: 'Studio Craft',
-      teluguTitle: 'స్టూడియో ఆర్టిస్ట్రీ',
-      style: 'Sterile Execution',
-      image: assetUrl('/images/gallery/arun-studio-session.png'),
-    },
-    {
-      title: 'Custom Concepts',
-      teluguTitle: 'కస్టమ్ కాన్సెప్ట్స్',
-      style: 'Bespoke Stencil',
-      isBadge: true,
-    },
   ];
 
-  const journeySteps = [
+  // 5 Step Timeline matching Reference Column 2
+  const steps = [
     {
-      num: '01',
+      num: '1',
       title: 'IDEA',
-      teluguTitle: 'ఐడియా & కథ',
-      desc: 'Bring your personal narrative, memories, or visual reference.',
-      teluguDesc: 'మీ వ్యక్తిగత కథ లేదా ఆలోచనను తీసుకురండి.',
-      icon: <Sparkles className="w-4 h-4 text-[#d4af37]" />,
+      desc: 'Share your vision',
+      teluguTitle: 'ఐడియా',
+      teluguDesc: 'మీ ఆలోచనను పంచుకోండి',
+      icon: <Sparkles className="w-3.5 h-3.5 text-zinc-300" />,
     },
     {
-      num: '02',
+      num: '2',
       title: 'DESIGN',
-      teluguTitle: 'డిజైన్ రచన',
-      desc: 'Arun drafts original sketches calibrated to your body flow.',
-      teluguDesc: 'అరుణ్ డిజిటల్ స్కెచింగ్ ద్వారా ప్రత్యేక డిజైన్ రూపొందిస్తారు.',
-      icon: <PenTool className="w-4 h-4 text-[#ffd885]" />,
+      desc: 'We create the art',
+      teluguTitle: 'డిజైన్',
+      teluguDesc: 'కస్టమ్ డ్రాఫ్టింగ్',
+      icon: <PenTool className="w-3.5 h-3.5 text-zinc-300" />,
     },
     {
-      num: '03',
+      num: '3',
       title: 'CONSULTATION',
-      teluguTitle: 'కన్సల్టేషన్ & సైజింగ్',
-      desc: 'Sizing test, anatomical placement, and thermal stencil test.',
-      teluguDesc: 'శరీర భాగానికి తగినట్లు సైజింగ్ మరియు ప్లేస్‌మెంట్ పరీక్ష.',
-      icon: <Layers className="w-4 h-4 text-[#d4af37]" />,
+      desc: 'Discuss & finalize',
+      teluguTitle: 'కన్సల్టేషన్',
+      teluguDesc: 'ప్లేస్‌మెంట్ & సైజింగ్',
+      icon: <Layers className="w-3.5 h-3.5 text-zinc-300" />,
     },
     {
-      num: '04',
+      num: '4',
       title: 'TATTOO',
+      desc: 'Bringing it to life',
       teluguTitle: 'టాటూ సెషన్',
-      desc: 'Sterile rotary execution with hospital-grade hygiene.',
-      teluguDesc: 'క్లినికల్ పరిశుభ్రతతో ప్రొఫెషనల్ సూది పనితనం.',
-      icon: <ShieldCheck className="w-4 h-4 text-emerald-400" />,
+      teluguDesc: 'స్టెరైల్ ప్రెసిషన్',
+      icon: <ShieldCheck className="w-3.5 h-3.5 text-zinc-300" />,
     },
     {
-      num: '05',
+      num: '5',
       title: 'AFTERCARE',
-      teluguTitle: 'ఆఫ్టర్‌కేర్ కేర్',
-      desc: 'Medical-grade SecondSkin barrier & lifelong healing care.',
-      teluguDesc: 'శాశ్వత కాంతివంతమైన హీలింగ్ కోసం రక్షణ పద్ధతులు.',
-      icon: <HeartHandshake className="w-4 h-4 text-[#ffd885]" />,
+      desc: 'Keep it looking fresh',
+      teluguTitle: 'ఆఫ్టర్‌కేర్',
+      teluguDesc: 'శాశ్వత రక్షణ',
+      icon: <HeartHandshake className="w-3.5 h-3.5 text-zinc-300" />,
     },
   ];
 
-  const handleQuickBookSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     studioAudio.playZoneTransitionChime();
-    onOpenBooking(selectedService);
+    onOpenBooking(selectedService, selectedDate);
   };
 
   return (
     <div className={`w-full py-6 select-none ${language === 'te' ? 'font-telugu' : ''}`}>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
         
         {/* ========================================================================= */}
         {/* COLUMN 1: SERVICES & STYLES (4 Cols) */}
         {/* ========================================================================= */}
-        <div className="lg:col-span-4 flex flex-col justify-between subtle-glass rounded-3xl p-6 sm:p-7 border border-white/10 hover:border-[#d4af37]/40 transition-all duration-300">
+        <div className="lg:col-span-4 bg-[#0a0a0d] border border-white/10 rounded-2xl p-5 sm:p-6 flex flex-col justify-between hover:border-white/20 transition-all">
           <div>
-            {/* Header */}
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] font-mono tracking-widest text-[#d4af37] uppercase flex items-center gap-1.5">
-                <Flame className="w-3.5 h-3.5 text-[#d4af37]" />
-                SIGNATURE ARTISTRY
-              </span>
-              <span className="text-[10px] font-mono text-zinc-500">6 STYLES</span>
-            </div>
-
-            <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white tracking-wide uppercase mb-1">
+            <h3 className="font-sans text-sm sm:text-base font-bold text-white tracking-widest uppercase">
               SERVICES & STYLES
             </h3>
-            <p className="text-xs text-zinc-400 font-sans mb-6">
+            <p className="text-[11px] font-sans text-zinc-400 mt-1 mb-5">
               {language === 'te' 
-                ? 'ఫైన్ లైన్ నుండి హైపర్ రియలిజం వరకు - సంపూర్ణ కళాత్మకత.'
-                : 'From minimal to realism. Every discipline executed with single-needle precision.'}
+                ? 'మినిమల్ నుండి రియలిస్టిక్ వరకు — ప్రతి శైలికి జీవం పోస్తాం.' 
+                : 'From minimal to realistic — we bring every style to life.'}
             </p>
 
-            {/* 6 Mini Style Showcase Cards (2 columns x 3 rows) */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
-              {services.map((item, idx) => (
+            {/* 6 Authentic Style Tiles in a Horizontal Row matching Reference */}
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 mb-6">
+              {styles.map((style, idx) => (
                 <div
                   key={idx}
                   onClick={() => {
                     studioAudio.playZoneTransitionChime();
-                    onOpenBooking(item.title);
+                    if (onSelectArtworkModal) {
+                      onSelectArtworkModal(style.image, style.name);
+                    } else {
+                      onViewAllServices();
+                    }
                   }}
-                  className="group cursor-pointer rounded-2xl overflow-hidden bg-black/40 border border-white/10 hover:border-[#d4af37]/60 transition-all duration-300 p-2.5 flex flex-col justify-between hover:-translate-y-0.5 active:scale-95"
+                  className="group cursor-pointer flex flex-col items-center"
                 >
-                  {item.image ? (
-                    <div className="relative w-full h-24 rounded-xl overflow-hidden mb-2 bg-[#121217]">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                      <div className="absolute bottom-1.5 left-1.5 right-1.5">
-                        <span className="text-[9px] font-mono text-[#ffd885] tracking-wider uppercase block truncate">
-                          {item.style}
-                        </span>
-                      </div>
+                  <div className="w-full aspect-[3/4] rounded-lg overflow-hidden border border-white/10 bg-black/60 group-hover:border-[#d4af37] transition-all relative">
+                    <img
+                      src={style.image}
+                      alt={style.name}
+                      className="w-full h-full object-cover filter grayscale contrast-125 group-hover:scale-110 group-hover:grayscale-0 transition-all duration-500"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
+                    <div className="absolute bottom-1 inset-x-0 text-center">
+                      <span className="text-[8px] font-mono tracking-wider text-zinc-300 group-hover:text-[#ffd885] uppercase truncate px-0.5 block">
+                        {language === 'te' ? style.teluguName : style.name}
+                      </span>
                     </div>
-                  ) : (
-                    <div className="relative w-full h-24 rounded-xl mb-2 bg-gradient-to-br from-[#d4af37]/15 to-black/80 border border-[#d4af37]/20 flex flex-col items-center justify-center p-2 text-center">
-                      <Sparkles className="w-5 h-5 text-[#d4af37] mb-1 animate-pulse" />
-                      <span className="text-[10px] font-mono text-zinc-300 uppercase">Original Art</span>
-                    </div>
-                  )}
-
-                  <div>
-                    <h4 className="font-cinzel text-xs font-bold text-white group-hover:text-[#ffd67a] transition-colors truncate">
-                      {language === 'te' ? item.teluguTitle : item.title}
-                    </h4>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Bottom Button */}
+          {/* VIEW ALL SERVICES Button */}
           <button
             onClick={onViewAllServices}
-            className="w-full py-3 rounded-full subtle-glass border border-white/20 hover:border-[#d4af37] hover:bg-[#d4af37]/10 text-xs font-mono tracking-widest text-[#ffd885] uppercase flex items-center justify-center gap-2 transition-all group"
+            className="w-fit px-5 py-2 rounded-full border border-white/20 hover:border-[#d4af37] hover:bg-white/5 text-[11px] font-sans tracking-widest text-zinc-200 hover:text-white uppercase flex items-center gap-2 transition-all mt-auto"
           >
             <span>VIEW ALL SERVICES</span>
-            <ArrowRight className="w-3.5 h-3.5 text-[#d4af37] group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-3.5 h-3.5 text-zinc-400" />
           </button>
         </div>
 
         {/* ========================================================================= */}
         {/* COLUMN 2: THE TATTOO JOURNEY (4 Cols) */}
         {/* ========================================================================= */}
-        <div className="lg:col-span-4 flex flex-col justify-between subtle-glass rounded-3xl p-6 sm:p-7 border border-white/10 hover:border-[#d4af37]/40 transition-all duration-300">
-          <div>
-            {/* Header */}
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] font-mono tracking-widest text-[#d4af37] uppercase flex items-center gap-1.5">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                STANDARDIZED PROTOCOL
-              </span>
-              <span className="text-[10px] font-mono text-zinc-500">5 PHASES</span>
-            </div>
+        <div className="lg:col-span-4 relative overflow-hidden bg-[#0a0a0d] border border-white/10 rounded-2xl p-5 sm:p-6 flex flex-col justify-between hover:border-white/20 transition-all">
+          {/* Authentic Studio Session In-Progress Background Image */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center filter grayscale opacity-25 mix-blend-luminosity pointer-events-none"
+            style={{ backgroundImage: `url(${assetUrl('/images/gallery/arun-studio-session.png')})` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0d] via-[#0a0a0d]/80 to-[#0a0a0d]/60 pointer-events-none" />
 
-            <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white tracking-wide uppercase mb-1">
+          <div className="relative z-10">
+            <h3 className="font-sans text-sm sm:text-base font-bold text-white tracking-widest uppercase">
               THE TATTOO JOURNEY
             </h3>
-            <p className="text-xs text-zinc-400 font-sans mb-6">
+            <p className="text-[11px] font-sans text-zinc-400 mt-1 mb-8">
               {language === 'te'
-                ? 'మీ ఆలోచన నుండి శాశ్వత మాస్టర్‌పీస్ వరకు దశల వారీ ప్రయాణం.'
-                : 'Step-by-step master process ensuring anatomical comfort & lasting vibrancy.'}
+                ? 'ఆలోచన నుండి ఆఫ్టర్‌కేర్ వరకు సంపూర్ణ సురక్షిత ప్రక్రియ.'
+                : 'A seamless process from idea to aftercare.'}
             </p>
 
-            {/* 5-Step Connected Timeline Nodes */}
-            <div className="space-y-4 relative pl-3 sm:pl-4 mb-6">
-              {/* Vertical connecting line */}
-              <div className="absolute left-[19px] sm:left-[23px] top-3 bottom-3 w-px bg-gradient-to-b from-[#d4af37] via-[#d4af37]/40 to-transparent" />
+            {/* 5 Connected Circular Nodes Progression matching Reference Image */}
+            <div className="relative flex items-center justify-between mb-8 px-2">
+              {/* Horizontal Connecting Line */}
+              <div className="absolute left-6 right-6 top-4 h-px bg-white/20 -z-0" />
 
-              {journeySteps.map((step, idx) => (
-                <div key={idx} className="relative flex items-start gap-3.5 group">
-                  {/* Node icon pill */}
-                  <div className="relative z-10 w-7 h-7 sm:w-8 sm:h-8 rounded-full subtle-glass border border-[#d4af37]/60 group-hover:border-[#d4af37] flex items-center justify-center shrink-0 bg-[#070709] transition-transform group-hover:scale-110">
-                    <span className="text-[10px] font-mono font-bold text-[#ffd885]">
-                      {step.num}
-                    </span>
+              {steps.map((step, idx) => (
+                <div key={idx} className="relative z-10 flex flex-col items-center text-center group cursor-pointer" onClick={onLearnJourney}>
+                  <div className="w-8 h-8 rounded-full border border-white/30 bg-[#0a0a0d] flex items-center justify-center group-hover:border-[#d4af37] group-hover:scale-110 transition-all shadow-lg mb-2">
+                    {step.icon}
                   </div>
-
-                  {/* Step text */}
-                  <div className="flex-1 pt-0.5">
-                    <div className="flex items-center gap-2">
-                      <h4 className="font-cinzel text-xs font-bold text-white group-hover:text-[#ffd67a] transition-colors">
-                        {language === 'te' ? step.teluguTitle : step.title}
-                      </h4>
-                      {step.icon}
-                    </div>
-                    <p className="text-[11px] text-zinc-400 leading-snug font-sans mt-0.5">
-                      {language === 'te' ? step.teluguDesc : step.desc}
-                    </p>
-                  </div>
+                  <span className="text-[9px] font-mono tracking-wider text-white font-bold block uppercase">
+                    {step.num}. {language === 'te' ? step.teluguTitle : step.title}
+                  </span>
+                  <span className="text-[8px] font-sans text-zinc-400 max-w-[55px] leading-tight mt-0.5 hidden sm:block">
+                    {language === 'te' ? step.teluguDesc : step.desc}
+                  </span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Bottom Button */}
-          <button
-            onClick={onLearnJourney}
-            className="w-full py-3 rounded-full subtle-glass border border-white/20 hover:border-[#d4af37] hover:bg-[#d4af37]/10 text-xs font-mono tracking-widest text-[#ffd885] uppercase flex items-center justify-center gap-2 transition-all group"
-          >
-            <span>LEARN MORE</span>
-            <ChevronRight className="w-3.5 h-3.5 text-[#d4af37] group-hover:translate-x-1 transition-transform" />
-          </button>
+          {/* LEARN MORE Button */}
+          <div className="relative z-10 mt-auto">
+            <button
+              onClick={onLearnJourney}
+              className="w-fit px-5 py-2 rounded-full border border-white/20 hover:border-[#d4af37] hover:bg-white/5 text-[11px] font-sans tracking-widest text-zinc-200 hover:text-white uppercase flex items-center gap-2 transition-all"
+            >
+              <span>LEARN MORE</span>
+              <ArrowRight className="w-3.5 h-3.5 text-zinc-400" />
+            </button>
+          </div>
         </div>
 
         {/* ========================================================================= */}
-        {/* COLUMN 3: BOOK YOUR SESSION & AUTHENTIC SLEEVE BADGE (4 Cols) */}
+        {/* COLUMN 3: BOOK YOUR SESSION & SLEEVE CROP (4 Cols) */}
         {/* ========================================================================= */}
-        <div className="lg:col-span-4 flex flex-col justify-between subtle-glass rounded-3xl p-6 sm:p-7 border border-white/10 hover:border-[#d4af37]/40 transition-all duration-300">
-          <div>
-            {/* Header */}
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] font-mono tracking-widest text-[#d4af37] uppercase flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-[#d4af37]" />
-                DIRECT ATELIER CALENDAR
-              </span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            </div>
+        <div className="lg:col-span-4 bg-[#0a0a0d] border border-white/10 rounded-2xl p-5 sm:p-6 flex flex-col justify-between hover:border-white/20 transition-all relative overflow-hidden">
+          
+          <div className="flex gap-4">
+            
+            {/* Form Section */}
+            <div className="flex-1">
+              <h3 className="font-sans text-sm sm:text-base font-bold text-white tracking-widest uppercase">
+                BOOK YOUR SESSION
+              </h3>
+              <p className="text-[11px] font-sans text-zinc-400 mt-1 mb-5">
+                {language === 'te' 
+                  ? 'మీ కొత్త టాటూ కోసం ఇప్పుడే రిజర్వ్ చేసుకోండి.' 
+                  : "Let's create something amazing together."}
+              </p>
 
-            <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white tracking-wide uppercase mb-1">
-              BOOK YOUR SESSION
-            </h3>
-            <p className="text-xs text-zinc-400 font-sans mb-5">
-              {language === 'te'
-                ? 'మాస్టర్ ఆర్టిస్ట్ అరుణ్‌తో డైరెక్ట్ సెషన్ లేదా కన్సల్టేషన్ ఖరారు చేసుకోండి.'
-                : 'Reserve your personal date. Private atelier sessions with master artist Arun.'}
-            </p>
-
-            {/* Quick Interactive Reservation Form */}
-            <form onSubmit={handleQuickBookSubmit} className="space-y-3.5 mb-6">
-              <div>
-                <label className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block mb-1">
-                  Select Style / Service
-                </label>
-                <select
-                  value={selectedService}
-                  onChange={(e) => setSelectedService(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-black/60 border border-white/15 focus:border-[#d4af37] text-white text-xs font-mono focus:outline-none transition-colors"
-                >
-                  <option value="Custom Tattoos">Custom Tattoos (Original Concept)</option>
-                  <option value="Fine Line">Fine Line & Geometric</option>
-                  <option value="Blackwork">Blackwork & Shiva Devotional</option>
-                  <option value="Realism">Monochrome Realism Portrait</option>
-                  <option value="Cover Up">Cover Up & Scar Camouflage</option>
-                  <option value="Tattoo Consultation">In-Person Consultation (30-45m)</option>
-                </select>
-              </div>
-
-              <div className="grid grid-cols-2 gap-2.5">
+              <form onSubmit={handleBookingSubmit} className="space-y-4">
                 <div>
-                  <label className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block mb-1">
+                  <label className="text-[10px] font-sans text-zinc-400 uppercase tracking-wider block mb-1">
+                    Select Service
+                  </label>
+                  <select
+                    value={selectedService}
+                    onChange={(e) => setSelectedService(e.target.value)}
+                    className="w-full px-3 py-2 rounded-lg bg-black/60 border border-white/15 focus:border-[#d4af37] text-zinc-200 text-xs font-sans focus:outline-none transition-colors"
+                  >
+                    <option value="Custom Tattoos">Custom Tattoos (Original Concept)</option>
+                    <option value="Fine Line">Fine Line & Geometric</option>
+                    <option value="Blackwork">Blackwork & Shiva Devotional</option>
+                    <option value="Realism">Realism Portraiture</option>
+                    <option value="Cover Up">Cover Up & Scar Camouflage</option>
+                    <option value="Tattoo Consultation">In-Person Consultation</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="text-[10px] font-sans text-zinc-400 uppercase tracking-wider block mb-1">
                     Preferred Date
                   </label>
                   <input
                     type="date"
-                    value={preferredDate}
-                    onChange={(e) => setPreferredDate(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-black/60 border border-white/15 focus:border-[#d4af37] text-white text-xs font-mono focus:outline-none transition-colors"
+                    value={selectedDate}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                    className="w-full px-3 py-2 rounded-lg bg-black/60 border border-white/15 focus:border-[#d4af37] text-zinc-200 text-xs font-sans focus:outline-none transition-colors"
                   />
                 </div>
 
-                <div>
-                  <label className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block mb-1">
-                    Preferred Window
-                  </label>
-                  <select
-                    value={timeSlot}
-                    onChange={(e) => setTimeSlot(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl bg-black/60 border border-white/15 focus:border-[#d4af37] text-white text-xs font-mono focus:outline-none transition-colors"
-                  >
-                    <option value="Morning">Morning (11:00 AM)</option>
-                    <option value="Afternoon">Afternoon (02:30 PM)</option>
-                    <option value="Evening">Evening (06:00 PM)</option>
-                  </select>
-                </div>
-              </div>
+                {/* Warm Gold Solid Pill Button CONTINUE -> */}
+                <button
+                  type="submit"
+                  className="w-full py-2.5 px-6 rounded-full bg-[#c5a059] hover:bg-[#d4af37] text-black font-sans font-bold text-xs tracking-widest uppercase flex items-center justify-center gap-2 shadow-lg shadow-black/40 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300"
+                >
+                  <span>CONTINUE</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-black" />
+                </button>
+              </form>
+            </div>
 
-              {/* Gold Action Button */}
-              <button
-                type="submit"
-                className="w-full py-3.5 px-6 rounded-full bg-gradient-to-r from-[#d4af37] via-[#e5c158] to-[#b38728] text-black font-bold uppercase tracking-widest text-xs font-mono flex items-center justify-center gap-2 shadow-xl shadow-[#d4af37]/30 hover:scale-[1.01] active:scale-[0.99] transition-all"
-              >
-                <span>CONTINUE TO BOOKING</span>
-                <ArrowRight className="w-4 h-4 text-black" />
-              </button>
-            </form>
-
-            {/* Sleeve Preview Card: YOUR STORY / OUR INK */}
-            <div className="rounded-2xl p-3 bg-black/40 border border-white/10 flex items-center gap-3">
-              <div className="w-14 h-14 rounded-xl overflow-hidden shrink-0 border border-[#d4af37]/40">
+            {/* Right Edge: Vertical Sleeve Crop matching Reference Image */}
+            <div className="w-24 sm:w-28 shrink-0 flex flex-col items-center justify-between border-l border-white/10 pl-3">
+              {/* Sleeve Photograph */}
+              <div className="w-full h-36 rounded-lg overflow-hidden border border-white/10 relative">
                 <img
                   src={assetUrl('/images/gallery/compass-geometric-band.png')}
-                  alt="Fine Line Geometric Band"
-                  className="w-full h-full object-cover"
+                  alt="Authentic Sleeve Ink"
+                  className="w-full h-full object-cover filter grayscale contrast-125"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
               </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-1.5 text-[9px] font-mono text-[#ffd885] tracking-wider uppercase font-bold">
-                  <Sparkles className="w-3 h-3 text-[#d4af37]" />
-                  <span>YOUR STORY / OUR INK</span>
-                </div>
-                <p className="text-[11px] text-zinc-300 font-sans truncate mt-0.5">
-                  Private Atelier • Master Artist Arun
-                </p>
-                <p className="text-[9px] text-zinc-500 font-mono truncate">
-                  Opposite to Gravity Gym, First Floor
-                </p>
+
+              {/* Vertical Text: YOUR STORY OUR INK */}
+              <div className="text-center pt-2">
+                <span className="text-[8px] font-mono tracking-[0.25em] text-zinc-400 uppercase leading-relaxed block">
+                  YOUR<br />STORY<br />OUR INK
+                </span>
               </div>
             </div>
+
           </div>
 
-          {/* Quick Direct Link */}
-          <div className="pt-3 text-center">
-            <span className="text-[10px] font-mono text-zinc-400">
-              Immediate inquiry? Call <a href="tel:7207202082" className="text-[#ffd885] hover:underline font-bold">+91 7207202082</a>
-            </span>
-          </div>
         </div>
 
       </div>
