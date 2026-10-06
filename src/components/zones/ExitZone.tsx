@@ -26,11 +26,18 @@ export const ExitZone: React.FC<ExitZoneProps> = ({ onReturnToStart, onOpenBooki
       
       {/* Header */}
       <div className="max-w-2xl mx-auto mb-10">
+        <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-3 rounded-2xl overflow-hidden border border-[#d4af37]/40 shadow-xl bg-black/60 p-1">
+          <img
+            src={STUDIO_CONTACT.logoUrl}
+            alt="Arun Tattoos Official Logo"
+            className="w-full h-full object-contain aspect-square"
+          />
+        </div>
         <span className="text-xs font-mono tracking-widest text-[#d4af37] uppercase flex items-center justify-center gap-1.5">
           <Sparkles className="w-3.5 h-3.5" />
           ZONE 09 • DEPARTURE & CONNECT
         </span>
-        <h2 className="text-4xl md:text-6xl font-cinzel font-black text-white mt-2 mb-3">
+        <h2 className="text-3xl md:text-5xl font-cinzel font-black text-white mt-2 mb-3">
           {ez.name}
         </h2>
         <p className="font-cinzel text-lg md:text-xl text-[#d4af37] font-semibold mb-1">

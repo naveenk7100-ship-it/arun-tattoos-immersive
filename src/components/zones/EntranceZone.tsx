@@ -12,6 +12,7 @@ import {
   Compass 
 } from 'lucide-react';
 import { useLanguage } from '../../translations/LanguageContext';
+import { STUDIO_CONTACT } from '../../data/studioData';
 
 interface EntranceZoneProps {
   onEnter: () => void;
@@ -50,10 +51,15 @@ export const EntranceZone: React.FC<EntranceZoneProps> = ({ onEnter, onOpenBooki
         <span className="text-zinc-300 font-sans text-[11px]">STUDIO OPEN TODAY</span>
       </div>
 
-      {/* 2. Main Brand Title & Tagline (Editorial Typography Hierarchy) */}
-      <h1 className="text-4xl sm:text-6xl md:text-8xl font-cinzel font-black tracking-tight text-white uppercase leading-[0.95] mb-3 select-none">
-        ARUN <span className="gold-gradient-text">TATTOOS</span>
-      </h1>
+      {/* 2. Authentic Arun Tattoos Logo Emblem */}
+      <div className="relative mb-5 group select-none">
+        <div className="absolute -inset-6 bg-[radial-gradient(circle_at_center,_rgba(212,175,55,0.25)_0%,transparent_70%)] pointer-events-none" />
+        <img
+          src={STUDIO_CONTACT.logoUrl}
+          alt="Arun Tattoos Official Logo"
+          className="w-48 sm:w-60 md:w-72 h-auto aspect-square mx-auto object-contain drop-shadow-[0_0_35px_rgba(212,175,55,0.4)] rounded-2xl transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
 
       <p className="font-cinzel text-lg sm:text-2xl md:text-3xl tracking-[0.24em] md:tracking-[0.32em] text-[#d4af37] font-semibold mb-1 uppercase">
         CRAFTED IN INK. DEFINED BY YOU.

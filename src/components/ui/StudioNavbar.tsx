@@ -68,26 +68,19 @@ export const StudioNavbar: React.FC<StudioNavbarProps> = ({
           onClick={() => handleZoneClick('entrance')}
           className="cursor-pointer group flex items-center gap-3 select-none"
         >
-          <div className="w-9 h-9 rounded-full border border-[#d4af37]/60 bg-[#121217] flex items-center justify-center transition-transform duration-500 group-hover:scale-105 group-hover:border-[#d4af37] shadow-lg shadow-black/80 overflow-hidden shrink-0">
-            {STUDIO_CONTACT.logoUrl ? (
-              <img
-                src={STUDIO_CONTACT.logoUrl}
-                alt="Arun Tattoos Official Crest"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  (e.currentTarget as HTMLElement).style.display = 'none';
-                }}
-              />
-            ) : (
-              <span className="font-cinzel text-[#d4af37] text-xs font-bold tracking-wider">AT</span>
-            )}
+          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl border border-[#d4af37]/60 bg-black/80 p-0.5 flex items-center justify-center transition-transform duration-500 group-hover:scale-105 group-hover:border-[#d4af37] shadow-lg shadow-black/80 overflow-hidden shrink-0">
+            <img
+              src={STUDIO_CONTACT.logoUrl}
+              alt="Arun Tattoos Official Logo"
+              className="w-full h-full object-contain aspect-square"
+            />
           </div>
           <div className="flex flex-col">
-            <span className="font-brush text-lg sm:text-xl text-white tracking-wider leading-none group-hover:text-[#ffd67a] transition-colors">
-              ARUN
+            <span className="font-cinzel tracking-[0.2em] text-sm sm:text-base font-bold text-white group-hover:text-[#ffd67a] transition-colors leading-tight">
+              ARUN TATTOOS
             </span>
-            <span className="text-[9px] tracking-[0.38em] text-zinc-400 uppercase font-sans font-semibold mt-0.5">
-              TATTOOS
+            <span className="text-[9px] tracking-[0.25em] text-[#a1a1aa] uppercase font-mono mt-0.5">
+              {t.nav.brandSubtitle}
             </span>
           </div>
         </div>
@@ -148,6 +141,15 @@ export const StudioNavbar: React.FC<StudioNavbarProps> = ({
             {currentZone.id === 'booking-area' && (
               <span className="absolute bottom-0 inset-x-0 h-0.5 bg-[#d4af37] rounded-full" />
             )}
+          </button>
+          <div className="w-px h-4 bg-white/15 mx-1" />
+          <button
+            onClick={() => setIsFloorPlanOpen(!isFloorPlanOpen)}
+            className="px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/10 text-[11px] uppercase font-mono tracking-wider text-[#d4af37] hover:text-white transition-colors flex items-center gap-1.5"
+            title={t.nav.floorPlanTitle}
+          >
+            <Compass className="w-3.5 h-3.5 text-[#d4af37]" />
+            <span>Floor Plan</span>
           </button>
         </nav>
 
@@ -314,13 +316,22 @@ export const StudioNavbar: React.FC<StudioNavbarProps> = ({
       {/* Mobile Drawer */}
       {isMobileMenuOpen && (
         <div className="lg:hidden absolute top-20 inset-x-4 subtle-glass-gold p-5 rounded-2xl shadow-2xl border border-[#d4af37]/30 z-50">
-          <div className="flex items-center justify-between pb-3 border-b border-white/10 mb-3">
-            <span className="text-xs font-mono text-[#d4af37] tracking-widest uppercase">
-              Studio Walkthrough
-            </span>
-            <span className="text-[11px] text-zinc-400 font-mono">
-              Vijayawada
-            </span>
+          <div className="flex items-center gap-3 pb-3 border-b border-white/10 mb-3">
+            <div className="w-10 h-10 rounded-xl overflow-hidden border border-[#d4af37]/40 bg-black/60 p-0.5 shrink-0">
+              <img
+                src={STUDIO_CONTACT.logoUrl}
+                alt="Arun Tattoos Official Logo"
+                className="w-full h-full object-contain aspect-square"
+              />
+            </div>
+            <div>
+              <span className="text-xs font-cinzel font-bold text-white tracking-widest uppercase block">
+                ARUN TATTOOS
+              </span>
+              <span className="text-[10px] text-[#d4af37] font-mono">
+                Studio Walkthrough
+              </span>
+            </div>
           </div>
 
           <div className="space-y-1.5 max-h-[60vh] overflow-y-auto pr-1">

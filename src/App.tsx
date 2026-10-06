@@ -1,19 +1,21 @@
 import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
-import type { StudioZoneId, StudioZone, GalleryArtwork } from './types';
-import { STUDIO_ZONES, GALLERY_ITEMS } from './data/studioData';
+import type { StudioZoneId, StudioZone } from './types';
+import { STUDIO_ZONES } from './data/studioData';
 import { StudioCanvas } from './components/canvas/StudioCanvas';
 import { StudioNavbar } from './components/ui/StudioNavbar';
 import { StudioFloorPlanHUD } from './components/ui/StudioFloorPlanHUD';
 import { StudioHotspotHUD } from './components/ui/StudioHotspotHUD';
 import { StudioLoader } from './components/ui/StudioLoader';
-import { StudioFooter } from './components/ui/StudioFooter';
-import { ReferenceHero } from './components/zones/ReferenceHero';
-import { StudioPanoramaStrip } from './components/zones/StudioPanoramaStrip';
-import { ReferenceEditorialGrid } from './components/zones/ReferenceEditorialGrid';
+import { EntranceZone } from './components/zones/EntranceZone';
+import { ReceptionZone } from './components/zones/ReceptionZone';
+import { GalleryZone } from './components/zones/GalleryZone';
+import { ArtistDeskZone } from './components/zones/ArtistDeskZone';
+import { TattooStationZone } from './components/zones/TattooStationZone';
+import { DesignTableZone } from './components/zones/DesignTableZone';
+import { BookingAreaZone } from './components/zones/BookingAreaZone';
+import { AftercareZone } from './components/zones/AftercareZone';
+import { ExitZone } from './components/zones/ExitZone';
 import { BookingModal } from './components/ui/BookingModal';
-import { ArtworkInspectorModal } from './components/ui/ArtworkInspectorModal';
-import { StudioJourneyModal } from './components/ui/StudioJourneyModal';
-import { StudioZoneDetailModal } from './components/ui/StudioZoneDetailModal';
 import { studioAudio } from './utils/audio';
 import { LanguageProvider } from './translations/LanguageContext';
 import type { AdminUser } from './types';
@@ -28,11 +30,6 @@ export function App() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [bookingPreset, setBookingPreset] = useState<{ artist?: string; style?: string }>({});
   const [isReducedMotion, setIsReducedMotion] = useState(false);
-
-  // Modals for deep commercial studio exploration
-  const [activeArtwork, setActiveArtwork] = useState<GalleryArtwork | null>(null);
-  const [isJourneyModalOpen, setIsJourneyModalOpen] = useState(false);
-  const [activeZoneDetailId, setActiveZoneDetailId] = useState<StudioZoneId | null>(null);
 
   // Private Admin Route & Authentication State
   const [isAdminMode, setIsAdminMode] = useState<boolean>(() => {
@@ -90,13 +87,14 @@ export function App() {
   const currentZone: StudioZone =
     STUDIO_ZONES.find((z) => z.id === currentZoneId) || STUDIO_ZONES[0];
 
-  // Smooth scroll to a target element or studio section
-  const handleSelectZone = useCallback((zoneId: StudioZoneId, openDetail = false) => {
+  // Smooth scroll to a target zone section with natural browser motion
+  const handleSelectZone = useCallback((zoneId: StudioZoneId) => {
     setCurrentZoneId(zoneId);
-    studioAudio.playZoneTransitionChime();
-    if (openDetail) {
-      setActiveZoneDetailId(zoneId);
+    const element = document.getElementById(zoneId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
+    studioAudio.playZoneTransitionChime();
   }, []);
 
   const handleOpenBooking = useCallback((artist?: string, style?: string) => {
@@ -104,19 +102,48 @@ export function App() {
     setIsBookingOpen(true);
   }, []);
 
-  const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setCurrentZoneId('entrance');
-  };
+  // Passive IntersectionObserver to update 3D camera & HUD as user scrolls naturally
+  useEffect(() => {
+    if (isAdminMode) return;
 
-  const handleScrollDown = () => {
-    const el = document.getElementById('showcase');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      window.scrollBy({ top: window.innerHeight * 0.85, behavior: 'smooth' });
-    }
-  };
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -40% 0px',
+      threshold: 0.1,
+    };
+
+    const handleIntersect: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id as StudioZoneId;
+          if (id && STUDIO_ZONES.some((z) => z.id === id)) {
+            setCurrentZoneId(id);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, observerOptions);
+
+    const zoneIds: StudioZoneId[] = [
+      'entrance',
+      'reception',
+      'gallery',
+      'artist-desk',
+      'tattoo-station',
+      'design-table',
+      'booking-area',
+      'aftercare',
+      'final-exit',
+    ];
+
+    zoneIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [isAdminMode]);
 
   // Keyboard navigation & admin shortcut
   useEffect(() => {
@@ -146,9 +173,6 @@ export function App() {
         handleSelectZone(STUDIO_ZONES[prevIdx].id);
       } else if (e.key === 'Escape') {
         setIsBookingOpen(false);
-        setActiveArtwork(null);
-        setIsJourneyModalOpen(false);
-        setActiveZoneDetailId(null);
       }
     };
 
@@ -158,10 +182,10 @@ export function App() {
 
   // Hotspot interaction router
   const handleHotspotAction = (targetZoneId: StudioZoneId) => {
-    if (targetZoneId === 'booking-area') {
+    if (targetZoneId === 'booking-area' && currentZoneId === 'reception') {
       handleOpenBooking();
     } else {
-      handleSelectZone(targetZoneId, true);
+      handleSelectZone(targetZoneId);
     }
   };
 
@@ -195,7 +219,7 @@ export function App() {
 
   return (
     <LanguageProvider>
-      <div className="relative min-h-screen bg-[#08080a] text-zinc-100 flex flex-col justify-between overflow-x-hidden">
+      <div className="relative min-h-screen bg-[#070709] text-zinc-100 flex flex-col justify-between overflow-x-hidden">
       
       {/* 0. CINEMATIC ENTRY LOADER */}
       {isLoading && (
@@ -211,10 +235,10 @@ export function App() {
         isReducedMotion={isReducedMotion}
       />
 
-      {/* 2. TOP LUXURY NAVIGATION HEADER MATCHING REFERENCE */}
+      {/* 2. TOP LUXURY NAVIGATION HEADER */}
       <StudioNavbar
         currentZone={currentZone}
-        onSelectZone={(zoneId) => handleSelectZone(zoneId, zoneId !== 'entrance')}
+        onSelectZone={handleSelectZone}
         onOpenBooking={() => handleOpenBooking()}
       />
 
@@ -224,56 +248,86 @@ export function App() {
         onHotspotAction={handleHotspotAction}
       />
 
-      {/* 4. MAIN EDITORIAL PAGE MATCHING REFERENCE IMAGE DIRECTLY */}
-      <main className="relative z-10 w-full overflow-x-hidden flex flex-col">
+      {/* 4. MAIN RESTORED OLD ARUN TATTOOS 9-ZONE WALKTHROUGH WITH SMOOTH NATIVE SCROLL */}
+      <main className="relative z-10 w-full overflow-x-hidden pt-20 pb-36">
         
-        {/* ================================================================= */}
-        {/* ROW 1: CINEMATIC HERO (Brand Wall, 3D Studio Portal, Value Pillars) */}
-        {/* ================================================================= */}
-        <section id="entrance" className="w-full">
-          <ReferenceHero
-            onStepInside={() => handleSelectZone('reception', true)}
+        {/* ZONE 01: STUDIO THRESHOLD / HERO */}
+        <section id="entrance" className="min-h-screen flex items-center justify-center px-4 py-12">
+          <EntranceZone
+            onEnter={() => handleSelectZone('reception')}
             onOpenBooking={() => handleOpenBooking()}
-            onScrollDown={handleScrollDown}
           />
         </section>
 
-        {/* ================================================================= */}
-        {/* ROW 2: 5-PANEL STUDIO SHOWCASE STRIP (Reception, Gallery, Desk, Station, Design) */}
-        {/* ================================================================= */}
-        <section id="showcase" className="w-full">
-          <StudioPanoramaStrip
-            onSelectZone={(zoneId) => handleSelectZone(zoneId, true)}
-            activeZoneId={currentZoneId}
+        {/* ZONE 02: CONCIERGE & WELCOME RECEPTION */}
+        <section id="reception" className="min-h-screen flex items-center justify-center px-4 py-16">
+          <ReceptionZone
+            onNavigateZone={handleSelectZone}
+            onOpenBooking={() => handleOpenBooking()}
           />
         </section>
 
-        {/* ================================================================= */}
-        {/* ROW 3: EDITORIAL CONTENT GRID (Services, Tattoo Journey, Booking) */}
-        {/* ================================================================= */}
-        <section id="editorial" className="w-full max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 py-6 sm:py-8">
-          <ReferenceEditorialGrid
-            onOpenBooking={(service) => handleOpenBooking('Arun', service)}
-            onViewAllServices={() => setActiveArtwork(GALLERY_ITEMS[0])}
-            onLearnJourney={() => setIsJourneyModalOpen(true)}
-            onSelectArtworkModal={(imgUrl) => {
-              const item = GALLERY_ITEMS.find((g) => g.imageUrl === imgUrl) || GALLERY_ITEMS[0];
-              setActiveArtwork(item);
+        {/* ZONE 03: THE LIVING ART GALLERY */}
+        <section id="gallery" className="min-h-screen flex items-center justify-center px-4 py-16">
+          <GalleryZone
+            onSelectPieceForBooking={(artwork) => {
+              handleOpenBooking(artwork.artist, artwork.category);
             }}
           />
         </section>
 
-        {/* ================================================================= */}
-        {/* ROW 4: LUXURY FOOTER (Coordinates, Phone, Socials, Cursive Signature) */}
-        {/* ================================================================= */}
-        <StudioFooter onScrollToTop={handleScrollToTop} />
+        {/* ZONE 04: MASTER ARTIST ATELIER */}
+        <section id="artist-desk" className="min-h-screen flex items-center justify-center px-4 py-16">
+          <ArtistDeskZone
+            onSelectArtistForBooking={(artistName) => {
+              handleOpenBooking(artistName);
+            }}
+          />
+        </section>
+
+        {/* ZONE 05: STERILE TATTOO STATION */}
+        <section id="tattoo-station" className="min-h-screen flex items-center justify-center px-4 py-16">
+          <TattooStationZone
+            onOpenBooking={() => handleOpenBooking()}
+          />
+        </section>
+
+        {/* ZONE 06: CONCEPT & STENCIL DESIGN TABLE */}
+        <section id="design-table" className="min-h-screen flex items-center justify-center px-4 py-16">
+          <DesignTableZone
+            onOpenBooking={() => handleOpenBooking()}
+          />
+        </section>
+
+        {/* ZONE 07: BOOKING & CONSULTATION LOUNGE */}
+        <section id="booking-area" className="min-h-screen flex items-center justify-center px-4 py-16">
+          <BookingAreaZone
+            initialArtist={bookingPreset.artist}
+            initialStyle={bookingPreset.style}
+            onReturnToStudio={() => handleSelectZone('entrance')}
+          />
+        </section>
+
+        {/* ZONE 08: AFTERCARE & PRESERVATION BAR */}
+        <section id="aftercare" className="min-h-screen flex items-center justify-center px-4 py-16">
+          <AftercareZone />
+        </section>
+
+        {/* ZONE 09: FINAL DEPARTURE & CONNECT */}
+        <section id="final-exit" className="min-h-screen flex items-center justify-center px-4 py-16">
+          <ExitZone
+            onReturnToStart={() => handleSelectZone('entrance')}
+            onOpenBooking={() => handleOpenBooking()}
+            onOpenAdmin={handleNavigateAdmin}
+          />
+        </section>
 
       </main>
 
       {/* 5. BOTTOM ARCHITECTURAL CONTROLLER HUD */}
       <StudioFloorPlanHUD
         currentZone={currentZone}
-        onSelectZone={(zoneId) => handleSelectZone(zoneId)}
+        onSelectZone={handleSelectZone}
       />
 
       {/* 6. MODAL BOOKING DIALOG */}
@@ -282,52 +336,6 @@ export function App() {
         onClose={() => setIsBookingOpen(false)}
         initialArtist={bookingPreset.artist}
         initialStyle={bookingPreset.style}
-      />
-
-      {/* 7. HIGH-RESOLUTION ARTWORK INSPECTOR MODAL */}
-      {activeArtwork && (
-        <ArtworkInspectorModal
-          artwork={activeArtwork}
-          onClose={() => setActiveArtwork(null)}
-          onSelectSimilarStyle={(style, artist) => {
-            setActiveArtwork(null);
-            handleOpenBooking(artist, style);
-          }}
-          onNextArtwork={() => {
-            const idx = GALLERY_ITEMS.findIndex((a) => a.id === activeArtwork.id);
-            const nextIdx = (idx + 1) % GALLERY_ITEMS.length;
-            setActiveArtwork(GALLERY_ITEMS[nextIdx]);
-          }}
-          onPrevArtwork={() => {
-            const idx = GALLERY_ITEMS.findIndex((a) => a.id === activeArtwork.id);
-            const prevIdx = (idx - 1 + GALLERY_ITEMS.length) % GALLERY_ITEMS.length;
-            setActiveArtwork(GALLERY_ITEMS[prevIdx]);
-          }}
-        />
-      )}
-
-      {/* 8. TATTOO JOURNEY & AFTERCARE MODAL */}
-      <StudioJourneyModal
-        isOpen={isJourneyModalOpen}
-        onClose={() => setIsJourneyModalOpen(false)}
-        onOpenBooking={() => {
-          setIsJourneyModalOpen(false);
-          handleOpenBooking('Arun');
-        }}
-      />
-
-      {/* 9. STUDIO ZONE DETAIL INSPECTOR MODAL */}
-      <StudioZoneDetailModal
-        zoneId={activeZoneDetailId}
-        onClose={() => setActiveZoneDetailId(null)}
-        onOpenBooking={() => {
-          setActiveZoneDetailId(null);
-          handleOpenBooking('Arun');
-        }}
-        onSelectZone={(zId) => {
-          setActiveZoneDetailId(zId);
-          handleSelectZone(zId);
-        }}
       />
 
       </div>
