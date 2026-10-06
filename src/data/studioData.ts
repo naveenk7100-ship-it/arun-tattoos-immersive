@@ -30,15 +30,15 @@ export const STUDIO_ZONES: StudioZone[] = [
     subhead: 'The Portal to Expression',
     shortDesc: 'The heavy black iron and ribbed glass doorway. Subtle ambiance and warm lighting welcome you into Arun Tattoos.',
     camera: {
-      position: [0, 1.8, 7.5],
-      target: [0, 1.5, 0],
-      fov: 48,
+      position: [0, 1.62, 3.8],
+      target: [0, 1.05, 0.45],
+      fov: 46,
     },
     lighting: {
-      ambientColor: '#121217',
-      ambientIntensity: 0.8,
-      spotlightColor: '#ffeaad',
-      spotlightIntensity: 2.4,
+      ambientColor: '#16151c',
+      ambientIntensity: 1.1,
+      spotlightColor: '#ffeedd',
+      spotlightIntensity: 3.2,
     },
   },
   {
@@ -49,9 +49,9 @@ export const STUDIO_ZONES: StudioZone[] = [
     subhead: 'Consultation & Studio Culture',
     shortDesc: 'Handcrafted charred timber counter, back-lit embossed bronze logo, bespoke flash dossiers, and a warm consultation seat.',
     camera: {
-      position: [0, 1.5, 3.2],
-      target: [0, 1.25, 0.4],
-      fov: 45,
+      position: [0, 1.45, 2.2],
+      target: [0, 1.0, 0.45],
+      fov: 44,
     },
     lighting: {
       ambientColor: '#1a1816',
@@ -106,9 +106,9 @@ export const STUDIO_ZONES: StudioZone[] = [
     subhead: 'Medical-Grade Sanctuary',
     shortDesc: 'Custom matte black hydraulic client recliner, surgical articulating daylight lamps, Bishop rotary machines, and sterile single-use barrier setup.',
     camera: {
-      position: [0, 1.65, -3.6],
-      target: [0, 1.05, -5.8],
-      fov: 44,
+      position: [1.8, 1.55, -3.8],
+      target: [2.2, 1.05, -5.5],
+      fov: 46,
     },
     lighting: {
       ambientColor: '#0e1115',
@@ -125,8 +125,8 @@ export const STUDIO_ZONES: StudioZone[] = [
     subhead: 'From Idea to Blueprint',
     shortDesc: 'Light table, thermal stencil printer, anatomical placement mirrors, and fine-line drafting tools for custom-calibrated tattoo flow.',
     camera: {
-      position: [3.3, 1.55, -3.8],
-      target: [3.6, 1.1, -5.6],
+      position: [3.2, 1.5, -0.6],
+      target: [3.6, 1.0, -1.8],
       fov: 46,
     },
     lighting: {

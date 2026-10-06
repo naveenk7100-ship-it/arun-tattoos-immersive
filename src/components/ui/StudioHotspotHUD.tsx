@@ -76,7 +76,7 @@ export const StudioHotspotHUD: React.FC<StudioHotspotHUDProps> = ({
   onHotspotAction,
 }) => {
   const hotspot = HOTSPOTS[currentZoneId];
-  if (!hotspot) return null;
+  if (!hotspot || currentZoneId === 'entrance') return null;
 
   return (
     <div className="fixed top-24 right-4 sm:right-8 z-30 pointer-events-auto animate-in fade-in slide-in-from-right-4 duration-500">

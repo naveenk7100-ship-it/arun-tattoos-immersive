@@ -252,7 +252,7 @@ export function App() {
       <main className="relative z-10 w-full overflow-x-hidden pt-20 pb-36">
         
         {/* ZONE 01: STUDIO THRESHOLD / HERO */}
-        <section id="entrance" className="min-h-screen flex items-center justify-center px-4 py-12">
+        <section id="entrance" className="min-h-[calc(100vh-5rem)] flex flex-col justify-between px-2 sm:px-6 md:px-10 pb-8 pt-4">
           <EntranceZone
             onEnter={() => handleSelectZone('reception')}
             onOpenBooking={() => handleOpenBooking()}

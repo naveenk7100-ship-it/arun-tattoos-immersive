@@ -64,7 +64,7 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
     const width = container.clientWidth || window.innerWidth;
     const height = container.clientHeight || window.innerHeight;
     const camera = new THREE.PerspectiveCamera(currentZone.camera.fov || 48, width / height, 0.1, 100);
-    camera.position.set(currentZone.camera.position[0], currentZone.camera.position[1] + 1.2, currentZone.camera.position[2] + 2);
+    camera.position.set(...currentZone.camera.position);
     camera.lookAt(...currentZone.camera.target);
     cameraRef.current = camera;
 
@@ -124,8 +124,8 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
 
     // Surgical daylight spotlight over the tattoo station (Zone 05)
     const surgicalLight = new THREE.SpotLight(0xf2f7ff, 3.8);
-    surgicalLight.position.set(0, 3.35, -4.8);
-    surgicalLight.target.position.set(0, 0.65, -5.9);
+    surgicalLight.position.set(2.2, 3.35, -4.6);
+    surgicalLight.target.position.set(2.2, 0.65, -5.5);
     surgicalLight.angle = Math.PI / 4.5;
     surgicalLight.penumbra = 0.6;
     surgicalLight.decay = 1.2;
@@ -144,11 +144,6 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
     floor.position.set(0, 0, -0.2);
     floor.receiveShadow = true;
     scene.add(floor);
-
-    // Subtle dark bronze inlay grid lines
-    const gridHelper = new THREE.GridHelper(16, 16, 0x3d3014, 0x181820);
-    gridHelper.position.set(0, 0.005, -0.2);
-    scene.add(gridHelper);
 
     // Studio Back Wall with vertical acoustic slat relief (z = -8.2m)
     const backWallGroup = new THREE.Group();
@@ -308,10 +303,12 @@ export const StudioCanvas: React.FC<StudioCanvasProps> = ({
 
     // Zone 05: Sterile Tattoo Station (Recliner, Bishop machine, Kwadron needle, Mayo stand)
     const tattooStationRig = createTattooStationRig(materials);
+    tattooStationRig.position.set(2.2, 0, 0.4);
     scene.add(tattooStationRig);
 
     // Zone 06: Concept & Stencil Lightbox Table
     const designTableRig = createDesignTableRig(materials);
+    designTableRig.position.set(3.6, 0, -1.8);
     scene.add(designTableRig);
 
     // Zone 07: Booking & Consultation Lounge
