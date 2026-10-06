@@ -221,18 +221,13 @@ export const StudioNavbar: React.FC<StudioNavbarProps> = ({
           {/* Quick Call */}
           <a
             href={`tel:${STUDIO_CONTACT.phone}`}
-            aria-label="Call Arun Tattoo Studio: +91 72072 02082"
-            className="hidden sm:flex items-center justify-center gap-2.5 px-3.5 sm:px-4 py-1.5 rounded-full subtle-glass border border-white/15 hover:border-[#d4af37]/60 text-zinc-300 hover:text-white transition-all duration-300 shadow-md shadow-black/40 shrink-0 select-none group min-w-[130px]"
+            aria-label="Call Arun Tattoo Studio: 72072 02082"
+            className="hidden sm:flex items-center justify-center gap-2 px-4 py-2 rounded-full subtle-glass border border-white/15 hover:border-[#d4af37]/60 text-zinc-300 hover:text-white transition-all duration-300 shadow-md shadow-black/40 shrink-0 select-none group"
           >
             <Phone className="w-3.5 h-3.5 text-[#d4af37] shrink-0 group-hover:scale-110 transition-transform" />
-            <div className="flex flex-col items-start justify-center leading-none text-left">
-              <span className="text-[10px] font-mono font-medium text-[#d4af37] tracking-wider leading-none">
-                +91
-              </span>
-              <span className="text-xs font-mono font-semibold text-zinc-100 tracking-wider leading-tight mt-0.5 whitespace-nowrap">
-                72072 02082
-              </span>
-            </div>
+            <span className="text-xs font-mono font-semibold text-zinc-100 tracking-wider whitespace-nowrap">
+              72072 02082
+            </span>
           </a>
 
           {/* WhatsApp Direct */}
